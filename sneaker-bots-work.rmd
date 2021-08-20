@@ -5,10 +5,8 @@ date: "8/20/2021"
 output: 
   html_document: 
     keep_md: yes
-  md_document:
-    preserve_yaml:false
 ---
-## This is a project about bots... sneaker bots.
+## This is a project about bots... sneaker bots!
 
 This is a passion project to practice my data analysis skills with R, while combining my love for the world of sneakers. 
 
