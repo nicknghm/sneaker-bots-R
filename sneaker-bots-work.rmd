@@ -5,8 +5,6 @@ date: "8/20/2021"
 output: 
   html_document: 
     keep_md: yes
-  md_document:
-    preserve_yaml:false
 ---
 ## This is a project about bots... sneaker bots.
 
