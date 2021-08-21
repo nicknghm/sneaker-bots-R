@@ -238,6 +238,11 @@ pd_lt_e <- bb_tibbler(pd_lt)
 pd_lt_e <- bb_tibbled_formatter(pd_lt_e)
 str(pd_lt_e)
 
+#prism
+prism_r_e <- bb_tibbler(prism_r)
+prism_r_e <- bb_tibbled_formatter(prism_r_e)
+str(prism_r_e)
+
 #scottbot
 scottbot_r_e <- bb_tibbler(scottbot_r)
 scottbot_r_e <- bb_tibbled_formatter(scottbot_r_e)
@@ -275,10 +280,180 @@ str(wrath_r_e)
 wrath_lt_e <- bb_tibbler(wrath_lt)
 wrath_lt_e <- bb_tibbled_formatter(wrath_lt_e)
 str(wrath_lt_e)
+
 ```
+### Mutate() for the additional data we need before joining tables together
 
 Now that all JSON files have been wrangled into tibbles with the right data types, it's time to join tables that have both renewal and lifetime copies.
 
 These bots are - Balko, Cyber, Dashe, Ganesh, Mekpreme, Nebula, PD, Velox, and Wrath.
 
+Before we join the tables, we need to first `mutate()` two columns onto each tibble, one that shows the key type (lifetime or renewal) of the bot, and another that shows the name of the bot (so we can have a tidy, long rather that wide, dataset) before we join all rows together to form a giant dataframe of all bots.
+
+The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`, 
+
+```{r}
+#balko
+balko_lt_e <- balko_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "balko") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+balko_r_e <- balko_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "balko") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#carnage
+carnage_r_e <- carnage_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "carnage") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#cyber
+cyber_lt_e <- cyber_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "cyber") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+cyber_r_e <- cyber_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "cyber") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#dashe
+dashe_lt_e <- dashe_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "dashe") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+dashe_r_e <- dashe_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "dashe") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#ganesh
+ganesh_lt_e <- ganesh_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "ganesh") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+ganesh_r_e <- ganesh_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "ganesh") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#kage
+kage_r_e <- kage_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "kage") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#mekaio
+mekaio_r_e <- mekaio_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "mekaio") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#mekpreme
+mekpreme_lt_e <- mekpreme_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "mekpreme") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+mekpreme_r_e <- mekpreme_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "mekpreme") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#nebula
+nebula_lt_e <- nebula_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "nebula") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+nebula_r_e <- nebula_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "nebula") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#ominous
+ominous_r_e <- ominous_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "ominous") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#pd
+pd_lt_e <- pd_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "pd") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+pd_r_e <- pd_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "pd") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#prism
+prism_r_e <- prism_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "prism") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#scottbot
+scottbot_r_e <- scottbot_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "scottbot") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#splashforce
+splashforce_r_e <- splashforce_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "splashforce") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#swftaio
+swftaio_r_e <- swftaio_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "swftaio") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#tohru
+tohru_r_e <- tohru_r_e %>% 
+  mutate(key_type = "tohru", bot_name = "tohru") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#velox
+velox_lt_e <- velox_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "velox") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+velox_r_e <- velox_r_e %>% 
+  mutate(key_type = "renewal", bot_name = "velox") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+#wrath
+wrath_lt_e <- wrath_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "wrath") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+wrath_r_e <- wrath_r_e %>%  
+  mutate(key_type = "renewal", bot_name = "wrath") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+
+```
+
+One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Chamos, FootAction), YeezySupply, Supreme, COllectibles (Funko), Retail (amazon, walmart). 
+
+Alright, onto the next `mutate()` chunk.
+
+```{r}
+
+
+```
 

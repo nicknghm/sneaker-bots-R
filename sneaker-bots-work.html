@@ -374,6 +374,11 @@ pd_lt_e &lt;- bb_tibbler(pd_lt)
 pd_lt_e &lt;- bb_tibbled_formatter(pd_lt_e)
 str(pd_lt_e)
 
+#prism
+prism_r_e &lt;- bb_tibbler(prism_r)
+prism_r_e &lt;- bb_tibbled_formatter(prism_r_e)
+str(prism_r_e)
+
 #scottbot
 scottbot_r_e &lt;- bb_tibbler(scottbot_r)
 scottbot_r_e &lt;- bb_tibbled_formatter(scottbot_r_e)
@@ -411,8 +416,167 @@ str(wrath_r_e)
 wrath_lt_e &lt;- bb_tibbler(wrath_lt)
 wrath_lt_e &lt;- bb_tibbled_formatter(wrath_lt_e)
 str(wrath_lt_e)</code></pre>
+</div>
+<div id="mutate-for-the-additional-data-we-need-before-joining-tables-together" class="section level3">
+<h3>Mutate() for the additional data we need before joining tables together</h3>
 <p>Now that all JSON files have been wrangled into tibbles with the right data types, it’s time to join tables that have both renewal and lifetime copies.</p>
 <p>These bots are - Balko, Cyber, Dashe, Ganesh, Mekpreme, Nebula, PD, Velox, and Wrath.</p>
+<p>Before we join the tables, we need to first <code>mutate()</code> two columns onto each tibble, one that shows the key type (lifetime or renewal) of the bot, and another that shows the name of the bot (so we can have a tidy, long rather that wide, dataset) before we join all rows together to form a giant dataframe of all bots.</p>
+<p>The tables should all have four variables with the same column names, ordered as such: <code>bot_name</code>, <code>key_type</code>, <code>transaction_date</code>, and <code>price</code>. We’ll do this with the help of <code>select()</code>,</p>
+<pre class="r"><code>#balko
+balko_lt_e &lt;- balko_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;balko&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+balko_r_e &lt;- balko_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;balko&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#carnage
+carnage_r_e &lt;- carnage_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;carnage&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#cyber
+cyber_lt_e &lt;- cyber_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;cyber&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+cyber_r_e &lt;- cyber_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;cyber&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#dashe
+dashe_lt_e &lt;- dashe_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;dashe&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+dashe_r_e &lt;- dashe_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;dashe&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#ganesh
+ganesh_lt_e &lt;- ganesh_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;ganesh&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+ganesh_r_e &lt;- ganesh_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;ganesh&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#kage
+kage_r_e &lt;- kage_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;kage&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#mekaio
+mekaio_r_e &lt;- mekaio_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;mekaio&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#mekpreme
+mekpreme_lt_e &lt;- mekpreme_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;mekpreme&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+mekpreme_r_e &lt;- mekpreme_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;mekpreme&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#nebula
+nebula_lt_e &lt;- nebula_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;nebula&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+nebula_r_e &lt;- nebula_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;nebula&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#ominous
+ominous_r_e &lt;- ominous_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;ominous&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#pd
+pd_lt_e &lt;- pd_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;pd&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+pd_r_e &lt;- pd_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;pd&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#prism
+prism_r_e &lt;- prism_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;prism&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#scottbot
+scottbot_r_e &lt;- scottbot_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;scottbot&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#splashforce
+splashforce_r_e &lt;- splashforce_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;splashforce&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#swftaio
+swftaio_r_e &lt;- swftaio_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;swftaio&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#tohru
+tohru_r_e &lt;- tohru_r_e %&gt;% 
+  mutate(key_type = &quot;tohru&quot;, bot_name = &quot;tohru&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#velox
+velox_lt_e &lt;- velox_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;velox&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+velox_r_e &lt;- velox_r_e %&gt;% 
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;velox&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+#wrath
+wrath_lt_e &lt;- wrath_lt_e %&gt;% 
+  mutate(key_type = &quot;lifetime&quot;, bot_name = &quot;wrath&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)
+
+wrath_r_e &lt;- wrath_r_e %&gt;%  
+  mutate(key_type = &quot;renewal&quot;, bot_name = &quot;wrath&quot;) %&gt;% 
+  arrange(transaction_date) %&gt;% 
+  select(bot_name, key_type, transaction_date, price)</code></pre>
+<p>One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Chamos, FootAction), YeezySupply, Supreme, COllectibles (Funko), Retail (amazon, walmart).</p>
+<p>Alright, onto the next <code>mutate()</code> chunk.</p>
 </div>
 </div>
 
