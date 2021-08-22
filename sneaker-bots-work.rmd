@@ -284,10 +284,6 @@ str(wrath_lt_e)
 ```
 ### Mutate() for the additional data we need before joining tables together
 
-Now that all JSON files have been wrangled into tibbles with the right data types, it's time to join tables that have both renewal and lifetime copies.
-
-These bots are - Balko, Cyber, Dashe, Ganesh, Mekpreme, Nebula, PD, Velox, and Wrath.
-
 Before we join the tables, we need to first `mutate()` two columns onto each tibble, one that shows the key type (lifetime or renewal) of the bot, and another that shows the name of the bot (so we can have a tidy, long rather that wide, dataset) before we join all rows together to form a giant dataframe of all bots.
 
 The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`, 
@@ -448,12 +444,111 @@ wrath_r_e <- wrath_r_e %>%
 
 ```
 
-One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Chamos, FootAction), YeezySupply, Supreme, COllectibles (Funko), Retail (amazon, walmart). 
+### Time to join tables!
+
+Now that all JSON files have been wrangled into tibbles with the right data types, it's time to join tables that have both renewal and lifetime copies.
+
+These bots are - balko, cyber, dashe, ganesh, mekpreme, nebula, pd, velox, and wrath.
+
+We'll use the `bind_rows()` function from `dplyr` to achieve this.
+
+```{r}
+
+balko_lt_r_e <- bind_rows(balko_lt_e, balko_r_e)
+cyber_lt_r_e <- bind_rows(cyber_lt_e, cyber_r_e)
+dashe_lt_r_e <- bind_rows(dashe_lt_e, dashe_r_e)
+ganesh_lt_r_e <- bind_rows(ganesh_lt_e, ganesh_r_e)
+mekpreme_lt_r_e <- bind_rows(mekpreme_lt_e, mekpreme_r_e)
+nebula_lt_r_e <- bind_rows(nebula_lt_e, nebula_r_e)
+pd_lt_r_e <- bind_rows(pd_lt_e, pd_r_e)
+velox_lt_r_e <- bind_rows(velox_lt_e, velox_r_e)
+wrath_lt_r_e <- bind_rows(wrath_lt_e, wrath_r_e)
+
+```
+### Different bots bot different sites
+
+One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?). 
+
+As we will be converting them into factors later on, if the bot supports a site, the value will be the site name (e.g. `shopify`), but if it does not, the value in the column will have 'no' in front of it (e.g. `no_shopify`) so we can assign levels to each column later on.
+
+Also, columns need to be created for bots that are US focused, and EU focused.
 
 Alright, onto the next `mutate()` chunk.
 
 ```{r}
 
+#balko - shopify 
+balko_lt_r_e <- balko_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#carnage - collectibles, retail
+carnage_r_e <- carnage_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "retail", mesh = "no_mesh", focus = "EU")
+
+#cyber - shopify, footsites, ys, supreme
+cyber_lt_r_e <- cyber_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
+
+#dashe - shopify, ys, supreme
+dashe_lt_r_e <- dashe_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#ganesh - footsites, ys, mesh
+ganesh_lt_r_e <- ganesh_lt_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "mesh", focus = "BOTH")
+
+#kage - footsites, retail
+kage_r_e <- kage_r_e %>% 
+  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
+
+#mekaio - shopify, footsites, ys
+mekaio_r_e <- mekaio_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#mekpreme - supreme
+mekpreme_lt_r_e <- mekpreme_lt_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
+
+#nebula - shopify, footsites, yeezysupply
+nebula_lt_r_e <- nebula_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#ominous - footsites, yeezysupply, retail
+ominous_r_e <- ominous_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
+
+#pd - shopify, footsites, yeezysupply
+pd_lt_r_e <- pd_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#prism - shopify, footsites, yeezysupply
+prism_r_e <- prism_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#scottbot - collectibles
+scottbot_r_e <- scottbot_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
+
+#splashforce - footsites, yeezysupply, adidas (kiv)
+splashforce_r_e <- splashforce_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#swftaio - retail
+splashforce_r_e <- splashforce_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
+
+#tohru - footsites, yeezysupply, supreme, nike (kiv)
+tohru_r_e <- tohru_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
+
+#velox - yeezysupply, supreme
+velox_lt_r_e <- velox_lt_r_e %>% 
+  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
+
+#wrath - shopify, footsites, yeezysupply, supreme
+wrath_lt_r_e <- wrath_lt_r_e %>% 
+  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
 
 ```
 
+Almost ready to bind all of these tibbles together...
