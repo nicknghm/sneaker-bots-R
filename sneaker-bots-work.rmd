@@ -467,7 +467,9 @@ wrath_lt_r_e <- bind_rows(wrath_lt_e, wrath_r_e)
 ```
 ### Different bots bot different sites
 
-One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?). 
+One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?), Off-white, and EU sites (Snipes, Net-a-porter, Offspring, NAKED, Starcow, SVD, Courier, Slam Jam, Solebox, Zalando). 
+
+To prevent data clutter, all EU sites will be consolidated under one column, as not many bots specialize in it, and those that do usually cover the full suite.
 
 As we will be converting them into factors later on, if the bot supports a site, the value will be the site name (e.g. `shopify`), but if it does not, the value in the column will have 'no' in front of it (e.g. `no_shopify`) so we can assign levels to each column later on.
 
@@ -499,7 +501,7 @@ ganesh_lt_r_e <- ganesh_lt_r_e %>%
 
 #kage - footsites, retail
 kage_r_e <- kage_r_e %>% 
-  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
+  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
 
 #mekaio - shopify, footsites, ys
 mekaio_r_e <- mekaio_r_e %>% 
@@ -552,3 +554,109 @@ wrath_lt_r_e <- wrath_lt_r_e %>%
 ```
 
 Almost ready to bind all of these tibbles together...
+
+### Is there a better way to present the data we have?
+
+After looking at how the data shaped up, it seems like it might be better to separate the site coverage of bots to a separate table, while keeping transactions in a separate table, to prevent unnecessary repetition, so let's get to work on that!
+
+This also allows us to get a nice overview of the bot ecosystem, and bots that are performing well whose transactions are not supported on botbroker.
+
+What bots are there?
+aiomoji, balko, burst, cyber, dashe, dragon, earthside, ecb, estock, eve, f3, flare, ganesh, hawkmesh, hayha, ignite, kage, koi, kodai, kylin, lexaio, linear, mbot, mekaio, mekpreme, noble, nsb, nyte, ominous, pd, prism, qbot, reaio, stellar, solar, sole, splashforce, tohru, trickle, thunder, valor, velox, viper, whatbot, wrath
+
+There are of course, bots that have been taken out of this analysis. Low tier Mobile bots (Polar, Quick Cop, etc), inactive bots (Fleek, Ghost, Phasma), raffle bots (infinit, thunder raffle, flare raffle, kicksrafflebot), bots that are difficult to sell (TSB, Rafflehub, Diao, etc), and private bots.
+
+Bots in this list all have keys that can be sold or bought easily.
+
+1. aiomoji - footsites (ASIA)
+2. balko - shopify, collectibles, offwhite
+3. burst - offwhite, eu sites
+4. carnage - collectibles, eu sites, retail
+5. cyber - shopify, footsites (EU, ASIA), yeezysupply, supreme, mobile, offwhite, collectibles
+6. dashe - yeezysupply, supreme
+7. dragon- nike_backend
+8. earthside - eu sites
+9. ecb - footsites (US)
+10. estock - retail
+11. eve - retail
+12. f3 - supreme, mobile
+13. flare - mesh, footsites (US, EU), eu sites
+14. fluid - retail
+15. ganesh - mesh, footlocker (US, EU, ASIA), yeezysupply, eu sites, adidas (US, EU), offwhite
+16. hawkmesh - mesh
+17. hayha - footsites (US), retail, new balance
+18. ignite - footsites (US), retail
+19. kage - shopify, footsites (US), retail
+20. kodai - footsites (US, EU, ASIA), yeezysupply, supreme
+21. koi - retail
+22. kylin - footsites (US, EU, ASIA), yeezysupply, adidas (US, EU, ASIA)
+23. lexaio - retail
+24. linear- footsites (US), nike_backend, nike_snkrs
+25. mbot - offwhite, mesh, mobile
+26. mekaio- shopify, footsites (US), yeezysupply
+27. mekpreme - supreme
+28. nebula - shopify, footsites (US), yeezysupply
+29. noble - footsites (US)
+30. nsb - shopify, footsites (US), yeezysupply
+31. nyte - footsites (US), yeezysupply
+32. ominous - footsites (US), yeezysupply, retail
+33. pd - shopify, yeezysupply, footsites (US)
+34. prism - shopify, yeezysupply, footsites (US)
+35. qbot - footsites (ASIA)
+36. reaio - nike_backend, nike_snkrs, footsites, supreme
+37. schrysant - supreme
+38. scottbot - collectibles
+39. stellar - retail
+40. solar - mesh, eu sites
+41. sole - shopify, adidas (US, EU), yeezysupply
+42. swftaio - retail, mobile, collectibles
+43. splashforce - footsites (US), yeezysupply
+44. tohru - footsites (US), yeezysupply, supreme, nike_backend
+45. trickle - shopify, yeezysupply, retail
+46. thunder - mesh, eu sites, offwhite
+47. valor - footsites (US), yeezysupply, supreme
+48. velox - supreme, yeezysupply
+49. whatbot - footsites (US), yeezysupply
+50. wrath - shopify, footsites (US), yeezysupply, supreme
+
+Just for some practice on constructing a dataframe from separate vectors...
+
+```{r}
+
+bot_name_id <- c("aiomoji", "balko", 'burst', "carnage", "cyber", "dashe", "dragon", "earthside", "ecb", "estock", "eve", "f3", "flare", "fluid", "ganesh", "hawkmesh", "hayha", "ignite", "kage", "kodai", "koi", "kylin", "lexaio", "linear", "mbot", "mekaio", "mekpreme", "nebula", "noble", "nsb", "nyte", "ominous", "pd", "prism", "qbot", "reaio", "schrysant", "scottbot", "stellar", "solar", "sole", "splashforce", "swftaio", "tohru", "trickle", "thunder", "valor", "velox", "whatbot", "wrath")
+
+shopify <- c("no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify")
+
+footsites <- c("footsites_asia", "no_footsites", "no_footsites", "no_footsites", "footsites_eu & asia", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "no_footsites", "no_footsites", "footsites_us & eu", "no_footsites", "all_regions", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "all_regions", "no_footsites", "all_regions", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_asia", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "footsites_us", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us")
+
+yeezysupply <- c("no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply")
+
+supreme <- c("no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme",  "supreme")
+
+retail <- c("no_retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "retail", "retail", "no_retail", "retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail")
+
+mesh <- c("no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh")
+
+eu_sites <- c("no_eu_sites", "no_eu_sites", "eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites","eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites",  "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites")
+
+nike <- c("no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike",  "nike_webstore", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore & snkrs", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore & snkrs", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike")
+
+adidas <- c("no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_us & eu", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_all_regions", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_us & eu", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas")
+
+new_balance <- c("no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance")
+
+offwhite <- c("no_offwhite", "offwhite", "offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite")
+
+collectibles <- c("no_collectibles", "collectibles", "no_collectibles", "collectibles", "collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles")
+
+mobile <- c("no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile")
+
+bot_data_compiled <- tibble(bot_name_id, shopify, footsites, yeezysupply, supreme, retail, mesh, eu_sites, nike, adidas, new_balance, offwhite, collectibles)
+
+head(bot_data_compiled)
+str(bot_data_compiled)
+
+```
+### Factor Time
+
+As we can see from the data currently, all columns are currently character strings, when they can be turned into factors for our analysis. Time to use the some base functions like `factor()` and the `forcats` package to help us.

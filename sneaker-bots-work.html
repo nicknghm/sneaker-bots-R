@@ -591,7 +591,8 @@ wrath_lt_r_e &lt;- bind_rows(wrath_lt_e, wrath_r_e)</code></pre>
 </div>
 <div id="different-bots-bot-different-sites" class="section level3">
 <h3>Different bots bot different sites</h3>
-<p>One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?).</p>
+<p>One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?), Off-white, and EU sites (Snipes, Net-a-porter, Offspring, NAKED, Starcow, SVD, Courier, Slam Jam, Solebox, Zalando).</p>
+<p>To prevent data clutter, all EU sites will be consolidated under one column, as not many bots specialize in it, and those that do usually cover the full suite.</p>
 <p>As we will be converting them into factors later on, if the bot supports a site, the value will be the site name (e.g. <code>shopify</code>), but if it does not, the value in the column will have ‘no’ in front of it (e.g. <code>no_shopify</code>) so we can assign levels to each column later on.</p>
 <p>Also, columns need to be created for bots that are US focused, and EU focused.</p>
 <p>Alright, onto the next <code>mutate()</code> chunk.</p>
@@ -617,7 +618,7 @@ ganesh_lt_r_e &lt;- ganesh_lt_r_e %&gt;%
 
 #kage - footsites, retail
 kage_r_e &lt;- kage_r_e %&gt;% 
-  mutate(shopify = &quot;shopify&quot;, footsites = &quot;no_footsites&quot;, yeezysupply = &quot;no_yeezysupply&quot;, supreme = &quot;no_supreme&quot;, collectibles = &quot;no_collectibles&quot;, retail = &quot;retail&quot;, mesh = &quot;no_mesh&quot;, focus = &quot;US&quot;)
+  mutate(shopify = &quot;no_shopify&quot;, footsites = &quot;footsites&quot;, yeezysupply = &quot;no_yeezysupply&quot;, supreme = &quot;no_supreme&quot;, collectibles = &quot;no_collectibles&quot;, retail = &quot;retail&quot;, mesh = &quot;no_mesh&quot;, focus = &quot;US&quot;)
 
 #mekaio - shopify, footsites, ys
 mekaio_r_e &lt;- mekaio_r_e %&gt;% 
@@ -667,6 +668,128 @@ velox_lt_r_e &lt;- velox_lt_r_e %&gt;%
 wrath_lt_r_e &lt;- wrath_lt_r_e %&gt;% 
   mutate(shopify = &quot;shopify&quot;, footsites = &quot;footsites&quot;, yeezysupply = &quot;yeezysupply&quot;, supreme = &quot;supreme&quot;, collectibles = &quot;no_collectibles&quot;, retail = &quot;no_retail&quot;, mesh = &quot;no_mesh&quot;, focus = &quot;US&quot;)</code></pre>
 <p>Almost ready to bind all of these tibbles together…</p>
+</div>
+<div id="is-there-a-better-way-to-present-the-data-we-have" class="section level3">
+<h3>Is there a better way to present the data we have?</h3>
+<p>After looking at how the data shaped up, it seems like it might be better to separate the site coverage of bots to a separate table, while keeping transactions in a separate table, to prevent unnecessary repetition, so let’s get to work on that!</p>
+<p>This also allows us to get a nice overview of the bot ecosystem, and bots that are performing well whose transactions are not supported on botbroker.</p>
+<p>What bots are there? aiomoji, balko, burst, cyber, dashe, dragon, earthside, ecb, estock, eve, f3, flare, ganesh, hawkmesh, hayha, ignite, kage, koi, kodai, kylin, lexaio, linear, mbot, mekaio, mekpreme, noble, nsb, nyte, ominous, pd, prism, qbot, reaio, stellar, solar, sole, splashforce, tohru, trickle, thunder, valor, velox, viper, whatbot, wrath</p>
+<p>There are of course, bots that have been taken out of this analysis. Low tier Mobile bots (Polar, Quick Cop, etc), inactive bots (Fleek, Ghost, Phasma), raffle bots (infinit, thunder raffle, flare raffle, kicksrafflebot), bots that are difficult to sell (TSB, Rafflehub, Diao, etc), and private bots.</p>
+<p>Bots in this list all have keys that can be sold or bought easily.</p>
+<ol style="list-style-type: decimal">
+<li>aiomoji - footsites (ASIA)</li>
+<li>balko - shopify, collectibles, offwhite</li>
+<li>burst - offwhite, eu sites</li>
+<li>carnage - collectibles, eu sites, retail</li>
+<li>cyber - shopify, footsites (EU, ASIA), yeezysupply, supreme, mobile, offwhite, collectibles</li>
+<li>dashe - yeezysupply, supreme</li>
+<li>dragon- nike_backend</li>
+<li>earthside - eu sites</li>
+<li>ecb - footsites (US)</li>
+<li>estock - retail</li>
+<li>eve - retail</li>
+<li>f3 - supreme, mobile</li>
+<li>flare - mesh, footsites (US, EU), eu sites</li>
+<li>fluid - retail</li>
+<li>ganesh - mesh, footlocker (US, EU, ASIA), yeezysupply, eu sites, adidas (US, EU), offwhite</li>
+<li>hawkmesh - mesh</li>
+<li>hayha - footsites (US), retail, new balance</li>
+<li>ignite - footsites (US), retail</li>
+<li>kage - shopify, footsites (US), retail</li>
+<li>kodai - footsites (US, EU, ASIA), yeezysupply, supreme</li>
+<li>koi - retail</li>
+<li>kylin - footsites (US, EU, ASIA), yeezysupply, adidas (US, EU, ASIA)</li>
+<li>lexaio - retail</li>
+<li>linear- footsites (US), nike_backend, nike_snkrs</li>
+<li>mbot - offwhite, mesh, mobile</li>
+<li>mekaio- shopify, footsites (US), yeezysupply</li>
+<li>mekpreme - supreme</li>
+<li>nebula - shopify, footsites (US), yeezysupply</li>
+<li>noble - footsites (US)</li>
+<li>nsb - shopify, footsites (US), yeezysupply</li>
+<li>nyte - footsites (US), yeezysupply</li>
+<li>ominous - footsites (US), yeezysupply, retail</li>
+<li>pd - shopify, yeezysupply, footsites (US)</li>
+<li>prism - shopify, yeezysupply, footsites (US)</li>
+<li>qbot - footsites (ASIA)</li>
+<li>reaio - nike_backend, nike_snkrs, footsites, supreme</li>
+<li>schrysant - supreme</li>
+<li>scottbot - collectibles</li>
+<li>stellar - retail</li>
+<li>solar - mesh, eu sites</li>
+<li>sole - shopify, adidas (US, EU), yeezysupply</li>
+<li>swftaio - retail, mobile, collectibles</li>
+<li>splashforce - footsites (US), yeezysupply</li>
+<li>tohru - footsites (US), yeezysupply, supreme, nike_backend</li>
+<li>trickle - shopify, yeezysupply, retail</li>
+<li>thunder - mesh, eu sites, offwhite</li>
+<li>valor - footsites (US), yeezysupply, supreme</li>
+<li>velox - supreme, yeezysupply</li>
+<li>whatbot - footsites (US), yeezysupply</li>
+<li>wrath - shopify, footsites (US), yeezysupply, supreme</li>
+</ol>
+<p>Just for some practice on constructing a dataframe from separate vectors…</p>
+<pre class="r"><code>bot_name_id &lt;- c(&quot;aiomoji&quot;, &quot;balko&quot;, &#39;burst&#39;, &quot;carnage&quot;, &quot;cyber&quot;, &quot;dashe&quot;, &quot;dragon&quot;, &quot;earthside&quot;, &quot;ecb&quot;, &quot;estock&quot;, &quot;eve&quot;, &quot;f3&quot;, &quot;flare&quot;, &quot;fluid&quot;, &quot;ganesh&quot;, &quot;hawkmesh&quot;, &quot;hayha&quot;, &quot;ignite&quot;, &quot;kage&quot;, &quot;kodai&quot;, &quot;koi&quot;, &quot;kylin&quot;, &quot;lexaio&quot;, &quot;linear&quot;, &quot;mbot&quot;, &quot;mekaio&quot;, &quot;mekpreme&quot;, &quot;nebula&quot;, &quot;noble&quot;, &quot;nsb&quot;, &quot;nyte&quot;, &quot;ominous&quot;, &quot;pd&quot;, &quot;prism&quot;, &quot;qbot&quot;, &quot;reaio&quot;, &quot;schrysant&quot;, &quot;scottbot&quot;, &quot;stellar&quot;, &quot;solar&quot;, &quot;sole&quot;, &quot;splashforce&quot;, &quot;swftaio&quot;, &quot;tohru&quot;, &quot;trickle&quot;, &quot;thunder&quot;, &quot;valor&quot;, &quot;velox&quot;, &quot;whatbot&quot;, &quot;wrath&quot;)
+
+shopify &lt;- c(&quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;no_shopify&quot;, &quot;shopify&quot;)
+
+footsites &lt;- c(&quot;footsites_asia&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;footsites_eu &amp; asia&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;footsites_us &amp; eu&quot;, &quot;no_footsites&quot;, &quot;all_regions&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;all_regions&quot;, &quot;no_footsites&quot;, &quot;all_regions&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;footsites_asia&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;, &quot;no_footsites&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;no_footsites&quot;, &quot;footsites_us&quot;, &quot;footsites_us&quot;)
+
+yeezysupply &lt;- c(&quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;no_yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;, &quot;yeezysupply&quot;)
+
+supreme &lt;- c(&quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;, &quot;no_supreme&quot;, &quot;supreme&quot;, &quot;supreme&quot;, &quot;no_supreme&quot;,  &quot;supreme&quot;)
+
+retail &lt;- c(&quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;, &quot;no_retail&quot;)
+
+mesh &lt;- c(&quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;mesh&quot;, &quot;no_mesh&quot;, &quot;mesh&quot;, &quot;mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;, &quot;no_mesh&quot;)
+
+eu_sites &lt;- c(&quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;eu_sites&quot;, &quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;,&quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;,  &quot;eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;, &quot;no_eu_sites&quot;)
+
+nike &lt;- c(&quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;,  &quot;nike_webstore&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;nike_webstore &amp; snkrs&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;nike_webstore &amp; snkrs&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;nike_webstore&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;, &quot;no_nike&quot;)
+
+adidas &lt;- c(&quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;adidas_us &amp; eu&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;adidas_all_regions&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;adidas_us &amp; eu&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;, &quot;no_adidas&quot;)
+
+new_balance &lt;- c(&quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;, &quot;no_new_balance&quot;)
+
+offwhite &lt;- c(&quot;no_offwhite&quot;, &quot;offwhite&quot;, &quot;offwhite&quot;, &quot;no_offwhite&quot;, &quot;offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;, &quot;no_offwhite&quot;)
+
+collectibles &lt;- c(&quot;no_collectibles&quot;, &quot;collectibles&quot;, &quot;no_collectibles&quot;, &quot;collectibles&quot;, &quot;collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;, &quot;no_collectibles&quot;)
+
+mobile &lt;- c(&quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;, &quot;no_mobile&quot;)
+
+bot_data_compiled &lt;- tibble(bot_name_id, shopify, footsites, yeezysupply, supreme, retail, mesh, eu_sites, nike, adidas, new_balance, offwhite, collectibles)
+
+head(bot_data_compiled)</code></pre>
+<pre><code>## # A tibble: 6 x 13
+##   bot_name_id shopify  footsites yeezysupply supreme retail mesh  eu_sites nike 
+##   &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1 aiomoji     no_shop~ footsite~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## 2 balko       shopify  no_foots~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## 3 burst       no_shop~ no_foots~ no_yeezysu~ no_sup~ no_re~ no_m~ eu_sites no_n~
+## 4 carnage     no_shop~ no_foots~ no_yeezysu~ no_sup~ retail no_m~ eu_sites no_n~
+## 5 cyber       shopify  footsite~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## 6 dashe       no_shop~ no_foots~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## # ... with 4 more variables: adidas &lt;chr&gt;, new_balance &lt;chr&gt;, offwhite &lt;chr&gt;,
+## #   collectibles &lt;chr&gt;</code></pre>
+<pre class="r"><code>str(bot_data_compiled)</code></pre>
+<pre><code>## tibble [50 x 13] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name_id : chr [1:50] &quot;aiomoji&quot; &quot;balko&quot; &quot;burst&quot; &quot;carnage&quot; ...
+##  $ shopify     : chr [1:50] &quot;no_shopify&quot; &quot;shopify&quot; &quot;no_shopify&quot; &quot;no_shopify&quot; ...
+##  $ footsites   : chr [1:50] &quot;footsites_asia&quot; &quot;no_footsites&quot; &quot;no_footsites&quot; &quot;no_footsites&quot; ...
+##  $ yeezysupply : chr [1:50] &quot;no_yeezysupply&quot; &quot;no_yeezysupply&quot; &quot;no_yeezysupply&quot; &quot;no_yeezysupply&quot; ...
+##  $ supreme     : chr [1:50] &quot;no_supreme&quot; &quot;no_supreme&quot; &quot;no_supreme&quot; &quot;no_supreme&quot; ...
+##  $ retail      : chr [1:50] &quot;no_retail&quot; &quot;no_retail&quot; &quot;no_retail&quot; &quot;retail&quot; ...
+##  $ mesh        : chr [1:50] &quot;no_mesh&quot; &quot;no_mesh&quot; &quot;no_mesh&quot; &quot;no_mesh&quot; ...
+##  $ eu_sites    : chr [1:50] &quot;no_eu_sites&quot; &quot;no_eu_sites&quot; &quot;eu_sites&quot; &quot;eu_sites&quot; ...
+##  $ nike        : chr [1:50] &quot;no_nike&quot; &quot;no_nike&quot; &quot;no_nike&quot; &quot;no_nike&quot; ...
+##  $ adidas      : chr [1:50] &quot;no_adidas&quot; &quot;no_adidas&quot; &quot;no_adidas&quot; &quot;no_adidas&quot; ...
+##  $ new_balance : chr [1:50] &quot;no_new_balance&quot; &quot;no_new_balance&quot; &quot;no_new_balance&quot; &quot;no_new_balance&quot; ...
+##  $ offwhite    : chr [1:50] &quot;no_offwhite&quot; &quot;offwhite&quot; &quot;offwhite&quot; &quot;no_offwhite&quot; ...
+##  $ collectibles: chr [1:50] &quot;no_collectibles&quot; &quot;collectibles&quot; &quot;no_collectibles&quot; &quot;collectibles&quot; ...</code></pre>
+</div>
+<div id="factor-time" class="section level3">
+<h3>Factor Time</h3>
+<p>As we can see from the data currently, all columns are currently character strings, when they can be turned into factors for our analysis. Time to use the some base functions like <code>factor()</code> and the <code>forcats</code> package to help us.</p>
 </div>
 </div>
 
