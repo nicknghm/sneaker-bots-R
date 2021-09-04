@@ -1,12 +1,12 @@
 ---
-title: "sneaker-bot-project"
+title: "A Data Wrangling & EDA Project - Sneaker Bots"
 author: "Nick"
 date: "8/20/2021"
 output: 
   html_document: 
     keep_md: yes
 ---
-## This is a project about bots... sneaker bots!
+# This is a project about bots... sneaker bots!
 
 This is a passion project to practice my data analysis skills with R, while combining my love for the world of sneakers. 
 
@@ -36,7 +36,7 @@ library(jsonlite)
 library(lubridate)
 ```
 
-### Initial data pull
+## Initial data pull
 
 We'll first construct a snippet that can efficiently allow us to convert file path backslashes to forward slashes. You can insert this code into your global options. For a more detailed explanation snippets, you can [find it on rstudio](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets). You could also use a program like Path Copy Copy.
 
@@ -96,7 +96,8 @@ velox_r <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/
 wrath_lt <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/wrath_lifetime.json")
 wrath_r <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/wrath_renewal.json")
 ```
-### Transforming data into correct data types 
+
+## Transforming data into correct data types 
 
 This process returns us a 2 column character matrix, of transaction date and price that looks like this:
 
@@ -191,141 +192,14 @@ bb_tibbled_formatter <- function(bot_df) {
 }
 ```
 
-Alright, on with the rest of the bots. (Putting the trial bot here as well for a compiled chunk to run)
+Alright, on with the rest of the bots. (output is hidden for brevity)
 
 
-```r
-#balko
-balko_r_e <- bb_tibbler(balko_r)
-balko_r_e <- bb_tibbled_formatter(balko_r_e)
-str(balko_r_e)
-
-balko_lt_e <- bb_tibbler(balko_lt)
-balko_lt_e <- bb_tibbled_formatter(balko_lt_e)
-str(balko_lt_e)
-
-#carnage
-carnage_r_e <- bb_tibbler(carnage_r)
-carnage_r_e <- bb_tibbled_formatter(carnage_r_e)
-str(carnage_r_e)
-
-#cyber
-cyber_r_e <- bb_tibbler(cyber_r)
-cyber_r_e <- bb_tibbled_formatter(cyber_r_e)
-str(cyber_r_e)
-
-cyber_lt_e <- bb_tibbler(cyber_lt)
-cyber_lt_e <- bb_tibbled_formatter(cyber_lt_e)
-str(cyber_lt_e)
-
-#dashe
-dashe_r_e <- bb_tibbler(dashe_r)
-dashe_r_e <- bb_tibbled_formatter(dashe_r_e)
-str(dashe_r_e)
-
-dashe_lt_e <- bb_tibbler(dashe_lt)
-dashe_lt_e <- bb_tibbled_formatter(dashe_lt_e)
-str(dashe_lt_e)
-
-#ganesh
-ganesh_r_e <- bb_tibbler(ganesh_r)
-ganesh_r_e <- bb_tibbled_formatter(ganesh_r_e)
-str(dashe_r_e)
-
-ganesh_lt_e <- bb_tibbler(ganesh_lt)
-ganesh_lt_e <- bb_tibbled_formatter(ganesh_lt_e)
-str(dashe_lt_e)
-
-#kage
-kage_r_e <- bb_tibbler(kage_r)
-kage_r_e <- bb_tibbled_formatter(kage_r_e)
-str(kage_r_e)
-
-#mekaio
-mekaio_r_e <- bb_tibbler(mekaio_r)
-mekaio_r_e <- bb_tibbled_formatter(mekaio_r_e)
-str(mekaio_r_e)
-
-#mekpreme
-mekpreme_r_e <- bb_tibbler(mekpreme_r)
-mekpreme_r_e <- bb_tibbled_formatter(mekpreme_r_e)
-str(mekpreme_r_e)
-
-mekpreme_lt_e <- bb_tibbler(mekpreme_lt)
-mekpreme_lt_e <- bb_tibbled_formatter(mekpreme_lt_e)
-str(mekpreme_lt_e)
-
-#nebula
-nebula_r_e <- bb_tibbler(nebula_r)
-nebula_r_e <- bb_tibbled_formatter(nebula_r_e)
-str(mekpreme_r_e)
-
-nebula_lt_e <- bb_tibbler(nebula_lt)
-nebula_lt_e <- bb_tibbled_formatter(nebula_lt_e)
-str(nebula_lt_e)
-
-#ominous
-ominous_r_e <- bb_tibbler(ominous_r)
-ominous_r_e <- bb_tibbled_formatter(ominous_r_e)
-str(ominous_r_e)
-
-#pd
-pd_r_e <- bb_tibbler(pd_r)
-pd_r_e <- bb_tibbled_formatter(pd_r_e)
-str(pd_r_e)
-
-pd_lt_e <- bb_tibbler(pd_lt)
-pd_lt_e <- bb_tibbled_formatter(pd_lt_e)
-str(pd_lt_e)
-
-#prism
-prism_r_e <- bb_tibbler(prism_r)
-prism_r_e <- bb_tibbled_formatter(prism_r_e)
-str(prism_r_e)
-
-#scottbot
-scottbot_r_e <- bb_tibbler(scottbot_r)
-scottbot_r_e <- bb_tibbled_formatter(scottbot_r_e)
-str(scottbot_r_e)
-
-#splashforce
-splashforce_r_e <- bb_tibbler(splashforce_r)
-splashforce_r_e <- bb_tibbled_formatter(splashforce_r_e)
-str(splashforce_r_e)
-
-#swftaio
-swftaio_r_e <- bb_tibbler(swftaio_r)
-swftaio_r_e <- bb_tibbled_formatter(swftaio_r_e)
-str(swftaio_r_e)
-
-#tohru
-tohru_r_e <- bb_tibbler(tohru_r)
-tohru_r_e <- bb_tibbled_formatter(tohru_r_e)
-str(tohru_r_e)
-
-#velox
-velox_r_e <- bb_tibbler(velox_r)
-velox_r_e <- bb_tibbled_formatter(velox_r_e)
-str(velox_r_e)
-
-velox_lt_e <- bb_tibbler(velox_lt)
-velox_lt_e <- bb_tibbled_formatter(velox_lt_e)
-str(velox_lt_e)
-
-#wrath
-wrath_r_e <- bb_tibbler(wrath_r)
-wrath_r_e <- bb_tibbled_formatter(wrath_r_e)
-str(wrath_r_e)
-
-wrath_lt_e <- bb_tibbler(wrath_lt)
-wrath_lt_e <- bb_tibbled_formatter(wrath_lt_e)
-str(wrath_lt_e)
-```
 ### Mutate() for the additional data we need before joining tables together
 
 Before we join the tables, we need to first `mutate()` two columns onto each tibble, one that shows the key type (lifetime or renewal) of the bot, and another that shows the name of the bot (so we can have a tidy, long rather that wide, dataset) before we join all rows together to form a giant dataframe of all bots.
 
-The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`, 
+The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`. Output is hidden for brevity, but we will be running the following code for each bot.
 
 
 ```r
@@ -334,154 +208,9 @@ balko_lt_e <- balko_lt_e %>%
   mutate(key_type = "lifetime", bot_name = "balko") %>% 
   arrange(transaction_date) %>% 
   select(bot_name, key_type, transaction_date, price)
-
-balko_r_e <- balko_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "balko") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#carnage
-carnage_r_e <- carnage_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "carnage") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#cyber
-cyber_lt_e <- cyber_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "cyber") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-cyber_r_e <- cyber_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "cyber") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#dashe
-dashe_lt_e <- dashe_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "dashe") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-dashe_r_e <- dashe_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "dashe") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#ganesh
-ganesh_lt_e <- ganesh_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "ganesh") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-ganesh_r_e <- ganesh_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "ganesh") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#kage
-kage_r_e <- kage_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "kage") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#mekaio
-mekaio_r_e <- mekaio_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "mekaio") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#mekpreme
-mekpreme_lt_e <- mekpreme_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "mekpreme") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-mekpreme_r_e <- mekpreme_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "mekpreme") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#nebula
-nebula_lt_e <- nebula_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "nebula") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-nebula_r_e <- nebula_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "nebula") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#ominous
-ominous_r_e <- ominous_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "ominous") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#pd
-pd_lt_e <- pd_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "pd") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-pd_r_e <- pd_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "pd") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#prism
-prism_r_e <- prism_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "prism") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#scottbot
-scottbot_r_e <- scottbot_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "scottbot") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#splashforce
-splashforce_r_e <- splashforce_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "splashforce") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#swftaio
-swftaio_r_e <- swftaio_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "swftaio") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#tohru
-tohru_r_e <- tohru_r_e %>% 
-  mutate(key_type = "tohru", bot_name = "tohru") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#velox
-velox_lt_e <- velox_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "velox") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-velox_r_e <- velox_r_e %>% 
-  mutate(key_type = "renewal", bot_name = "velox") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-#wrath
-wrath_lt_e <- wrath_lt_e %>% 
-  mutate(key_type = "lifetime", bot_name = "wrath") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
-
-wrath_r_e <- wrath_r_e %>%  
-  mutate(key_type = "renewal", bot_name = "wrath") %>% 
-  arrange(transaction_date) %>% 
-  select(bot_name, key_type, transaction_date, price)
 ```
+
+
 
 ### Time to join tables!
 
@@ -503,7 +232,41 @@ pd_lt_r_e <- bind_rows(pd_lt_e, pd_r_e)
 velox_lt_r_e <- bind_rows(velox_lt_e, velox_r_e)
 wrath_lt_r_e <- bind_rows(wrath_lt_e, wrath_r_e)
 ```
-### Different bots bot different sites
+
+With that done, let's bind all bot transaction data into one long, tidy tibble.
+
+
+```r
+bot_txns_compiled <- bind_rows(balko_lt_r_e, carnage_r_e, cyber_lt_r_e, dashe_lt_r_e, ganesh_lt_r_e, kage_r_e, mekaio_r_e, mekpreme_lt_r_e, nebula_lt_r_e, ominous_r_e, pd_lt_r_e, prism_r_e, scottbot_r_e, splashforce_r_e, swftaio_r_e, tohru_r_e, velox_lt_r_e, wrath_lt_r_e)
+
+head(bot_txns_compiled)
+```
+
+```
+## # A tibble: 6 x 4
+##   bot_name key_type transaction_date    price
+##   <chr>    <chr>    <dttm>              <dbl>
+## 1 balko    lifetime 2019-05-27 01:19:28  2000
+## 2 balko    lifetime 2019-05-27 06:49:38  2700
+## 3 balko    lifetime 2019-05-27 10:33:28  2350
+## 4 balko    lifetime 2019-05-27 21:27:04  2040
+## 5 balko    lifetime 2019-05-27 23:27:18  2100
+## 6 balko    lifetime 2019-05-28 14:51:09  2225
+```
+
+```r
+str(bot_txns_compiled)
+```
+
+```
+## tibble [32,670 x 4] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name        : chr [1:32670] "balko" "balko" "balko" "balko" ...
+##  $ key_type        : chr [1:32670] "lifetime" "lifetime" "lifetime" "lifetime" ...
+##  $ transaction_date: POSIXct[1:32670], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
+##  $ price           : num [1:32670] 2000 2700 2350 2040 2100 ...
+```
+
+## Different bots bot different sites
 
 One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?), Off-white, and EU sites (Snipes, Net-a-porter, Offspring, NAKED, Starcow, SVD, Courier, Slam Jam, Solebox, Zalando). 
 
@@ -516,79 +279,6 @@ Also, columns need to be created for bots that are US focused, and EU focused.
 Alright, onto the next `mutate()` chunk.
 
 
-```r
-#balko - shopify 
-balko_lt_r_e <- balko_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#carnage - collectibles, retail
-carnage_r_e <- carnage_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "retail", mesh = "no_mesh", focus = "EU")
-
-#cyber - shopify, footsites, ys, supreme
-cyber_lt_r_e <- cyber_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
-
-#dashe - shopify, ys, supreme
-dashe_lt_r_e <- dashe_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "no_footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#ganesh - footsites, ys, mesh
-ganesh_lt_r_e <- ganesh_lt_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "mesh", focus = "BOTH")
-
-#kage - footsites, retail
-kage_r_e <- kage_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
-
-#mekaio - shopify, footsites, ys
-mekaio_r_e <- mekaio_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#mekpreme - supreme
-mekpreme_lt_r_e <- mekpreme_lt_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
-
-#nebula - shopify, footsites, yeezysupply
-nebula_lt_r_e <- nebula_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#ominous - footsites, yeezysupply, retail
-ominous_r_e <- ominous_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
-
-#pd - shopify, footsites, yeezysupply
-pd_lt_r_e <- pd_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#prism - shopify, footsites, yeezysupply
-prism_r_e <- prism_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#scottbot - collectibles
-scottbot_r_e <- scottbot_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
-
-#splashforce - footsites, yeezysupply, adidas (kiv)
-splashforce_r_e <- splashforce_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#swftaio - retail
-splashforce_r_e <- splashforce_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "no_yeezysupply", supreme = "no_supreme", collectibles = "no_collectibles", retail = "retail", mesh = "no_mesh", focus = "US")
-
-#tohru - footsites, yeezysupply, supreme, nike (kiv)
-tohru_r_e <- tohru_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-
-#velox - yeezysupply, supreme
-velox_lt_r_e <- velox_lt_r_e %>% 
-  mutate(shopify = "no_shopify", footsites = "no_footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "BOTH")
-
-#wrath - shopify, footsites, yeezysupply, supreme
-wrath_lt_r_e <- wrath_lt_r_e %>% 
-  mutate(shopify = "shopify", footsites = "footsites", yeezysupply = "yeezysupply", supreme = "supreme", collectibles = "no_collectibles", retail = "no_retail", mesh = "no_mesh", focus = "US")
-```
 
 Almost ready to bind all of these tibbles together...
 
@@ -617,7 +307,7 @@ Bots in this list all have keys that can be sold or bought easily.
 10. estock - retail
 11. eve - retail
 12. f3 - supreme, mobile
-13. flare - mesh, footsites (US, EU), eu sites
+13. flare - mesh, footsites (EU), eu sites
 14. fluid - retail
 15. ganesh - mesh, footlocker (US, EU, ASIA), yeezysupply, eu sites, adidas (US, EU), offwhite
 16. hawkmesh - mesh
@@ -656,55 +346,28 @@ Bots in this list all have keys that can be sold or bought easily.
 49. whatbot - footsites (US), yeezysupply
 50. wrath - shopify, footsites (US), yeezysupply, supreme
 
-Just for some practice on constructing a dataframe from separate vectors...
+Just for some practice on constructing a dataframe from separate vectors... (output is hidden for brevity)
+
+
+This is how our final long dataframe looks like:
 
 
 ```r
-bot_name_id <- c("aiomoji", "balko", 'burst', "carnage", "cyber", "dashe", "dragon", "earthside", "ecb", "estock", "eve", "f3", "flare", "fluid", "ganesh", "hawkmesh", "hayha", "ignite", "kage", "kodai", "koi", "kylin", "lexaio", "linear", "mbot", "mekaio", "mekpreme", "nebula", "noble", "nsb", "nyte", "ominous", "pd", "prism", "qbot", "reaio", "schrysant", "scottbot", "stellar", "solar", "sole", "splashforce", "swftaio", "tohru", "trickle", "thunder", "valor", "velox", "whatbot", "wrath")
-
-shopify <- c("no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify")
-
-footsites <- c("footsites_asia", "no_footsites", "no_footsites", "no_footsites", "footsites_eu & asia", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "no_footsites", "no_footsites", "footsites_us & eu", "no_footsites", "all_regions", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "all_regions", "no_footsites", "all_regions", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_asia", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "footsites_us", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us")
-
-yeezysupply <- c("no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply")
-
-supreme <- c("no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "no_supreme", "supreme", "no_supreme", "no_supreme", "supreme", "supreme", "no_supreme",  "supreme")
-
-retail <- c("no_retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "retail", "retail", "no_retail", "retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "retail", "no_retail", "no_retail", "no_retail", "no_retail", "no_retail")
-
-mesh <- c("no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh", "mesh", "no_mesh", "no_mesh", "no_mesh", "no_mesh")
-
-eu_sites <- c("no_eu_sites", "no_eu_sites", "eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites","eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites",  "eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites", "no_eu_sites")
-
-nike <- c("no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike",  "nike_webstore", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore & snkrs", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore & snkrs", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "nike_webstore", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike", "no_nike")
-
-adidas <- c("no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_us & eu", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_all_regions", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "adidas_us & eu", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas", "no_adidas")
-
-new_balance <- c("no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance", "no_new_balance")
-
-offwhite <- c("no_offwhite", "offwhite", "offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite", "no_offwhite")
-
-collectibles <- c("no_collectibles", "collectibles", "no_collectibles", "collectibles", "collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles", "no_collectibles")
-
-mobile <- c("no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile")
-
-bot_data_compiled <- tibble(bot_name_id, shopify, footsites, yeezysupply, supreme, retail, mesh, eu_sites, nike, adidas, new_balance, offwhite, collectibles)
-
 head(bot_data_compiled)
 ```
 
 ```
-## # A tibble: 6 x 13
+## # A tibble: 6 x 14
 ##   bot_name_id shopify  footsites yeezysupply supreme retail mesh  eu_sites nike 
 ##   <chr>       <chr>    <chr>     <chr>       <chr>   <chr>  <chr> <chr>    <chr>
 ## 1 aiomoji     no_shop~ footsite~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
 ## 2 balko       shopify  no_foots~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
 ## 3 burst       no_shop~ no_foots~ no_yeezysu~ no_sup~ no_re~ no_m~ eu_sites no_n~
 ## 4 carnage     no_shop~ no_foots~ no_yeezysu~ no_sup~ retail no_m~ eu_sites no_n~
-## 5 cyber       shopify  footsite~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## 5 cyber       shopify  all_regi~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
 ## 6 dashe       no_shop~ no_foots~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
-## # ... with 4 more variables: adidas <chr>, new_balance <chr>, offwhite <chr>,
-## #   collectibles <chr>
+## # ... with 5 more variables: adidas <chr>, new_balance <chr>, offwhite <chr>,
+## #   collectibles <chr>, mobile <chr>
 ```
 
 ```r
@@ -712,7 +375,7 @@ str(bot_data_compiled)
 ```
 
 ```
-## tibble [50 x 13] (S3: tbl_df/tbl/data.frame)
+## tibble [50 x 14] (S3: tbl_df/tbl/data.frame)
 ##  $ bot_name_id : chr [1:50] "aiomoji" "balko" "burst" "carnage" ...
 ##  $ shopify     : chr [1:50] "no_shopify" "shopify" "no_shopify" "no_shopify" ...
 ##  $ footsites   : chr [1:50] "footsites_asia" "no_footsites" "no_footsites" "no_footsites" ...
@@ -726,7 +389,683 @@ str(bot_data_compiled)
 ##  $ new_balance : chr [1:50] "no_new_balance" "no_new_balance" "no_new_balance" "no_new_balance" ...
 ##  $ offwhite    : chr [1:50] "no_offwhite" "offwhite" "offwhite" "no_offwhite" ...
 ##  $ collectibles: chr [1:50] "no_collectibles" "collectibles" "no_collectibles" "collectibles" ...
+##  $ mobile      : chr [1:50] "no_mobile" "no_mobile" "no_mobile" "no_mobile" ...
 ```
-### Factor Time
+
+### The two data frames we've created
+
+At this point, we've created **two dataframes** - `bot_data_compiled`, and `bot_txns_compiled`, but some final manipulation needs to be done to help us have a smoother time with data analysis later on.
+
+## Factor Time
 
 As we can see from the data currently, all columns are currently character strings, when they can be turned into factors for our analysis. Time to use the some base functions like `factor()` and the `forcats` package to help us.
+
+With a full table of character columns, this might be the most efficient way to change all of them into factors. 
+
+
+```r
+bot_data_compiled <- bot_data_compiled %>% 
+  mutate_if(is.character, as_factor)
+
+str(bot_data_compiled)
+```
+
+```
+## tibble [50 x 14] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name_id : Factor w/ 50 levels "aiomoji","balko",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ shopify     : Factor w/ 2 levels "no_shopify","shopify": 1 2 1 1 2 1 1 1 1 1 ...
+##  $ footsites   : Factor w/ 5 levels "footsites_asia",..: 1 2 2 2 3 2 2 2 4 2 ...
+##  $ yeezysupply : Factor w/ 2 levels "no_yeezysupply",..: 1 1 1 1 2 2 1 1 1 1 ...
+##  $ supreme     : Factor w/ 2 levels "no_supreme","supreme": 1 1 1 1 2 2 1 1 1 1 ...
+##  $ retail      : Factor w/ 2 levels "no_retail","retail": 1 1 1 2 1 1 1 1 1 2 ...
+##  $ mesh        : Factor w/ 2 levels "no_mesh","mesh": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ eu_sites    : Factor w/ 2 levels "no_eu_sites",..: 1 1 2 2 1 1 1 1 2 1 ...
+##  $ nike        : Factor w/ 3 levels "no_nike","nike_webstore",..: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ adidas      : Factor w/ 3 levels "no_adidas","adidas_us & eu",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ new_balance : Factor w/ 2 levels "no_new_balance",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ offwhite    : Factor w/ 2 levels "no_offwhite",..: 1 2 2 1 2 1 1 1 1 1 ...
+##  $ collectibles: Factor w/ 2 levels "no_collectibles",..: 1 2 1 2 2 1 1 1 1 1 ...
+##  $ mobile      : Factor w/ 2 levels "no_mobile","mobile": 1 1 1 1 2 1 1 1 1 1 ...
+```
+
+```r
+levels(bot_data_compiled$footsites)
+```
+
+```
+## [1] "footsites_asia"        "no_footsites"          "all_regions_footsites"
+## [4] "footsites_us"          "footsites_eu"
+```
+At the moment, some factors aren't organized in the same way that the rest are (e.g. the absence of a site is not the first level), so lets get that sorted with `forcats::fct_relevel`.
+
+
+```r
+bot_data_compiled$footsites <- fct_relevel(bot_data_compiled$footsites, c("no_footsites", "footsites_us", "footsites_eu", "footsites_asia", "all_regions_footsites"))
+
+levels(bot_data_compiled$footsites)
+```
+
+```
+## [1] "no_footsites"          "footsites_us"          "footsites_eu"         
+## [4] "footsites_asia"        "all_regions_footsites"
+```
+
+```r
+str(bot_data_compiled)
+```
+
+```
+## tibble [50 x 14] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name_id : Factor w/ 50 levels "aiomoji","balko",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ shopify     : Factor w/ 2 levels "no_shopify","shopify": 1 2 1 1 2 1 1 1 1 1 ...
+##  $ footsites   : Factor w/ 5 levels "no_footsites",..: 4 1 1 1 5 1 1 1 2 1 ...
+##  $ yeezysupply : Factor w/ 2 levels "no_yeezysupply",..: 1 1 1 1 2 2 1 1 1 1 ...
+##  $ supreme     : Factor w/ 2 levels "no_supreme","supreme": 1 1 1 1 2 2 1 1 1 1 ...
+##  $ retail      : Factor w/ 2 levels "no_retail","retail": 1 1 1 2 1 1 1 1 1 2 ...
+##  $ mesh        : Factor w/ 2 levels "no_mesh","mesh": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ eu_sites    : Factor w/ 2 levels "no_eu_sites",..: 1 1 2 2 1 1 1 1 2 1 ...
+##  $ nike        : Factor w/ 3 levels "no_nike","nike_webstore",..: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ adidas      : Factor w/ 3 levels "no_adidas","adidas_us & eu",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ new_balance : Factor w/ 2 levels "no_new_balance",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ offwhite    : Factor w/ 2 levels "no_offwhite",..: 1 2 2 1 2 1 1 1 1 1 ...
+##  $ collectibles: Factor w/ 2 levels "no_collectibles",..: 1 2 1 2 2 1 1 1 1 1 ...
+##  $ mobile      : Factor w/ 2 levels "no_mobile","mobile": 1 1 1 1 2 1 1 1 1 1 ...
+```
+## Exploratory Data Analysis - Where Is The Opportunity For Bot Devs?
+
+We can first do a simple breakdown, where we take a look at where upcoming bots could consider focusing on, as some sites already are over-saturated with bots.
+
+
+```r
+#shopify breakdown
+bot_data_compiled %>% 
+  group_by(shopify) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   shopify        n percent
+##   <fct>      <int>   <dbl>
+## 1 no_shopify    39      78
+## 2 shopify       11      22
+```
+
+```r
+#footsites breakdown
+bot_data_compiled %>% 
+  group_by(footsites) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 5 x 3
+##   footsites                 n percent
+##   <fct>                 <int>   <dbl>
+## 1 no_footsites             25      50
+## 2 footsites_us             18      36
+## 3 footsites_eu              1       2
+## 4 footsites_asia            2       4
+## 5 all_regions_footsites     4       8
+```
+
+```r
+#yeezysupply breakdown
+bot_data_compiled %>% 
+  group_by(yeezysupply) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   yeezysupply        n percent
+##   <fct>          <int>   <dbl>
+## 1 no_yeezysupply    30      60
+## 2 yeezysupply       20      40
+```
+
+```r
+#supreme breakdown
+bot_data_compiled %>% 
+  group_by(supreme) %>% 
+  summarize(n = n())%>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   supreme        n percent
+##   <fct>      <int>   <dbl>
+## 1 no_supreme    39      78
+## 2 supreme       11      22
+```
+
+```r
+#retail
+bot_data_compiled %>% 
+  group_by(retail) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   retail        n percent
+##   <fct>     <int>   <dbl>
+## 1 no_retail    38      76
+## 2 retail       12      24
+```
+
+```r
+#mesh
+bot_data_compiled %>% 
+  group_by(mesh) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   mesh        n percent
+##   <fct>   <int>   <dbl>
+## 1 no_mesh    44      88
+## 2 mesh        6      12
+```
+
+```r
+#eu_sites
+bot_data_compiled %>% 
+  group_by(eu_sites) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   eu_sites        n percent
+##   <fct>       <int>   <dbl>
+## 1 no_eu_sites    43      86
+## 2 eu_sites        7      14
+```
+
+```r
+#nike 
+bot_data_compiled %>% 
+  group_by(nike) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 3 x 3
+##   nike                      n percent
+##   <fct>                 <int>   <dbl>
+## 1 no_nike                  46      92
+## 2 nike_webstore             2       4
+## 3 nike_webstore & snkrs     2       4
+```
+
+```r
+#adidas
+bot_data_compiled %>% 
+  group_by(adidas) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 3 x 3
+##   adidas                 n percent
+##   <fct>              <int>   <dbl>
+## 1 no_adidas             47      94
+## 2 adidas_us & eu         2       4
+## 3 adidas_all_regions     1       2
+```
+
+```r
+#new_balance
+bot_data_compiled %>% 
+  group_by(new_balance) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   new_balance        n percent
+##   <fct>          <int>   <dbl>
+## 1 no_new_balance    49      98
+## 2 new_balance        1       2
+```
+
+```r
+#off_white
+bot_data_compiled %>% 
+  group_by(offwhite) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   offwhite        n percent
+##   <fct>       <int>   <dbl>
+## 1 no_offwhite    45      90
+## 2 offwhite        5      10
+```
+
+```r
+#collectibles
+bot_data_compiled %>% 
+  group_by(collectibles) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   collectibles        n percent
+##   <fct>           <int>   <dbl>
+## 1 no_collectibles    46      92
+## 2 collectibles        4       8
+```
+
+```r
+#mobile
+bot_data_compiled %>% 
+  group_by(mobile) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   mobile        n percent
+##   <fct>     <int>   <dbl>
+## 1 no_mobile    46      92
+## 2 mobile        4       8
+```
+From the results, we can easily narrow down the most hotly contested sites among bot developers - **US footsites** (18/50 bots support) and **yeezysupply** (20/50 bots support). Of course, this is in part due to the number of drops that happen on these two sites, and the potential profits that botters can make from them.
+
+However, there are some sites that are extremely popular, yet few bot developers specialize in it - sites like **footlocker EU** and **footlocker ASIA** hardly have any bots that support it.
+
+```r
+bot_data_compiled %>% 
+  filter(footsites == "footsites_eu" | footsites == "footsites_asia" | footsites == "all_regions_footsites")
+```
+
+```
+## # A tibble: 7 x 14
+##   bot_name_id shopify  footsites yeezysupply supreme retail mesh  eu_sites nike 
+##   <fct>       <fct>    <fct>     <fct>       <fct>   <fct>  <fct> <fct>    <fct>
+## 1 aiomoji     no_shop~ footsite~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## 2 cyber       shopify  all_regi~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## 3 flare       no_shop~ footsite~ no_yeezysu~ no_sup~ no_re~ mesh  no_eu_s~ no_n~
+## 4 ganesh      no_shop~ all_regi~ yeezysupply no_sup~ no_re~ mesh  no_eu_s~ no_n~
+## 5 kodai       no_shop~ all_regi~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## 6 kylin       no_shop~ all_regi~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## 7 qbot        no_shop~ footsite~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## # ... with 5 more variables: adidas <fct>, new_balance <fct>, offwhite <fct>,
+## #   collectibles <fct>, mobile <fct>
+```
+This is a business opportunity for bot developers thinking of creating a new bot, as there is almost a monopoly on non-US footsites by bots like Qbot and Ganesh who perform miles better than most other bots on footlocker ASIA and EU respectively.
+
+However, the difficulty of botting footlocker is compounded by the fact that their sites are split according to NEW and OLD regions, requiring completely different scripts between both regions.
+
+At the end of the day, this is a potential area for future bot devs to look into.
+
+The other opportunity lies in creating a great shopify bot, as there are not many bots that consistently work across shopify sites.
+
+
+```r
+bot_data_compiled %>% 
+  filter(shopify == "shopify")
+```
+
+```
+## # A tibble: 11 x 14
+##    bot_name_id shopify footsites yeezysupply supreme retail mesh  eu_sites nike 
+##    <fct>       <fct>   <fct>     <fct>       <fct>   <fct>  <fct> <fct>    <fct>
+##  1 balko       shopify no_foots~ no_yeezysu~ no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  2 cyber       shopify all_regi~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+##  3 kage        shopify footsite~ no_yeezysu~ no_sup~ retail no_m~ no_eu_s~ no_n~
+##  4 mekaio      shopify footsite~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  5 nebula      shopify footsite~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  6 nsb         shopify footsite~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  7 pd          shopify footsite~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  8 prism       shopify footsite~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+##  9 sole        shopify no_foots~ yeezysupply no_sup~ no_re~ no_m~ no_eu_s~ no_n~
+## 10 trickle     shopify no_foots~ yeezysupply no_sup~ retail no_m~ no_eu_s~ no_n~
+## 11 wrath       shopify footsite~ yeezysupply supreme no_re~ no_m~ no_eu_s~ no_n~
+## # ... with 5 more variables: adidas <fct>, new_balance <fct>, offwhite <fct>,
+## #   collectibles <fct>, mobile <fct>
+```
+Out of these bots, the ones that perform phenomenally well at the moment are balko, wrath, and mek. Other bots are spotty at best on shopify, and the crown lies with these 3 bots. 
+
+My advice for a bot dev now would be to create a bot that is strong at **shopify and all footsites** - Similar to a bot like Kylin, but better. That would be the best way to create a bot that is wanted by the community, and also hold strong resell value.
+
+Of course, it's important to note the "niche" sites that some bots support, like Adidas, New Balance, or Nike. These sites usually require a huge amount of developer time investment, for little return (apart from Adidas bots and pure Nike bots), and as such do not present a good opportunity for bot devs.
+
+If a developer was looking to expand to one of these sites, I would recommend Adidas or New Balance.
+
+## Exploratory Data Analysis - Where Is The Opportunity For Bot Users?
+
+Now that we've done some preliminary analysis on what sites bots support, let's refer back to the transaction lists for the bots we have data on, `bot_txns_compiled`
+
+We'll first need to make sure bot_names and key types are factors, as they are currently in character format.
+
+
+```r
+bot_txns_compiled <- bot_txns_compiled %>% 
+  mutate_if(is.character, as_factor)
+
+str(bot_txns_compiled)
+```
+
+```
+## tibble [32,670 x 4] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name        : Factor w/ 18 levels "balko","carnage",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ key_type        : Factor w/ 2 levels "lifetime","renewal": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ transaction_date: POSIXct[1:32670], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
+##  $ price           : num [1:32670] 2000 2700 2350 2040 2100 ...
+```
+
+```r
+levels(bot_txns_compiled$key_type)
+```
+
+```
+## [1] "lifetime" "renewal"
+```
+Alright, we're good. Now, we'll try to look at some of the factors that affect price of lifetime vs renewal key in 2020. We'll first have to nail down which bots were on botbroker in 2020, from January, and check out when the firs transactions happened as well.
+
+### Bot Fever in 2020 - Fuelled By COVID
+
+
+```r
+bot_txns_compiled %>%
+    filter(transaction_date >= date("2020-01-01"), transaction_date <= date("2020-01-31")) %>% 
+    arrange(bot_name, key_type, transaction_date) %>%
+    group_by(bot_name, key_type) %>%
+    top_n(1) %>% 
+    arrange(desc(price))
+```
+
+```
+## Selecting by price
+```
+
+```
+## # A tibble: 12 x 4
+## # Groups:   bot_name, key_type [12]
+##    bot_name    key_type transaction_date    price
+##    <fct>       <fct>    <dttm>              <dbl>
+##  1 cyber       lifetime 2020-01-03 03:44:05  4800
+##  2 cyber       renewal  2020-01-24 17:01:42  3700
+##  3 balko       lifetime 2020-01-27 02:32:36  2900
+##  4 balko       renewal  2020-01-29 16:39:32  2450
+##  5 mekpreme    lifetime 2020-01-08 18:32:12  1200
+##  6 pd          lifetime 2020-01-26 19:15:19   896
+##  7 prism       renewal  2020-01-07 00:07:09   800
+##  8 mekpreme    renewal  2020-01-11 11:09:05   585
+##  9 pd          renewal  2020-01-10 14:49:16   550
+## 10 dashe       lifetime 2020-01-10 01:56:51   415
+## 11 splashforce renewal  2020-01-24 00:56:44   350
+## 12 dashe       renewal  2020-01-30 21:35:54   175
+```
+Many of these bots at the time were at pretty stable prices in line with what they've been for at least half a year prior. However, by the middle of the year, when COVID really hit, it forced many people to stay at home for extened periods of time, and this has lasted all the way till present. With one of the most populated botting communities, the US, receiving multiple stimulus checks as well, this further changed the demand for bots. As a comparison, we'll take a look at prices of bots by the end of the year.
+
+
+```r
+bot_txns_compiled %>%
+    filter(transaction_date >= date("2020-07-01"), transaction_date <= date("2020-12-31")) %>% 
+    arrange(bot_name, key_type, transaction_date) %>%
+    group_by(bot_name, key_type) %>%
+    top_n(1) %>% 
+    arrange(desc(price))
+```
+
+```
+## Selecting by price
+```
+
+```
+## # A tibble: 31 x 4
+## # Groups:   bot_name, key_type [22]
+##    bot_name key_type transaction_date    price
+##    <fct>    <fct>    <dttm>              <dbl>
+##  1 wrath    lifetime 2020-10-17 03:07:48  8990
+##  2 cyber    lifetime 2020-10-17 14:20:08  8700
+##  3 wrath    renewal  2020-10-13 14:46:37  7777
+##  4 cyber    renewal  2020-09-12 22:23:33  6600
+##  5 cyber    renewal  2020-10-13 15:30:27  6600
+##  6 prism    renewal  2020-09-10 12:55:57  5000
+##  7 prism    renewal  2020-09-10 16:30:36  5000
+##  8 prism    renewal  2020-09-12 16:37:05  5000
+##  9 prism    renewal  2020-09-12 16:51:17  5000
+## 10 nebula   lifetime 2020-10-21 04:01:36  4500
+## # ... with 21 more rows
+```
+Most bots were hitting all time highs then, fuelled by the demand for a side hustle at home, and the hype for sneakers further sending the prices to record highs. Just a simple comparison between Cyber, a well respected and performing bot is enough - Prices nearly doubled in a year, giving you a great > 100% ROI if you had a lifetime key handy.
+
+### How many lifetime vs renewal keys are there for bots with both? And how does it affect price?
+
+
+```r
+#balko freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "balko" & year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   key_type     n percent
+##   <fct>    <int>   <dbl>
+## 1 lifetime   177    11.7
+## 2 renewal   1333    88.3
+```
+
+```r
+bot_txns_compiled %>%
+  filter(bot_name == "balko" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   key_type avg_txn_price
+##   <fct>            <dbl>
+## 1 lifetime         2742.
+## 2 renewal          1822.
+```
+
+```r
+#cyber freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "cyber", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   key_type     n percent
+##   <fct>    <int>   <dbl>
+## 1 lifetime   120    16.4
+## 2 renewal    612    83.6
+```
+
+```r
+bot_txns_compiled %>%
+  filter(bot_name == "cyber" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   key_type avg_txn_price
+##   <fct>            <dbl>
+## 1 lifetime         5835.
+## 2 renewal          4645.
+```
+
+```r
+#wrath freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "wrath", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   key_type     n percent
+##   <fct>    <int>   <dbl>
+## 1 lifetime   109    29.5
+## 2 renewal    260    70.5
+```
+
+```r
+bot_txns_compiled %>%
+  filter(bot_name == "wrath" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   key_type avg_txn_price
+##   <fct>            <dbl>
+## 1 lifetime         4096.
+## 2 renewal          3118.
+```
+
+```r
+#dashe freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "dashe", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+```
+
+```
+## # A tibble: 2 x 3
+##   key_type     n percent
+##   <fct>    <int>   <dbl>
+## 1 lifetime  1576    41.7
+## 2 renewal   2207    58.3
+```
+
+```r
+bot_txns_compiled %>%
+  filter(bot_name == "dashe" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   key_type avg_txn_price
+##   <fct>            <dbl>
+## 1 lifetime          417.
+## 2 renewal           124.
+```
+
+Looking at this selection of bots, we can tell that bot key prices on average are based on two things: **number of keys**, and **performance of the bot** - The more number of keys a bot has, the lower the price will be. The better a bot performs, the more hype generated by users, and the more the community desires the bot. In general, most bot developers also choose to have about 10% to 20% lifetime keys, while the rest are renewals. 
+
+Annual renewal fees often range from $300 - $400 USD a year, giving bot devs very little incentive to make lifetime keys, which are often created for friends, giveaways on twitter, or special events.
+
+Specifically referring to Dashe, the interesting thing here is that when the number of keys (lifetime + renewal) increase, even with a higher % of lifetime keys, the price difference between the two is wider compared to the other bots.
+
+This could be a result of its significantly lower price point and status as a good entry level bot, making it a good bot for people to get into this hobby. (though it doesn't work as well as the other 3 above.)
+
+
+```r
+# Number of keys to price analysis
+
+keys_plot_2020 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "dashe", "mekpreme", "pd", "prism", "splashforce") & year(transaction_date) == 2020) %>% 
+  group_by(bot_name, key_type) %>% 
+  summarize(n = n())
+```
+
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
+## longer object length is not a multiple of shorter object length
+```
+
+```
+## Warning in is.na(e1) | is.na(e2): longer object length is not a multiple of
+## shorter object length
+```
+
+```
+## `summarise()` has grouped output by 'bot_name'. You can override using the `.groups` argument.
+```
+
+```r
+ggplot(keys_plot_2020, aes(x = bot_name, y = n, fill = key_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() + guides(fill = guide_legend(reverse = TRUE)) +
+  labs(y = "no. of keys", title = "Bot Keys in 2020 (Jan - Dec)")
+```
+
+![](sneaker-bots-work_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+
+```r
+bot_txns_compiled %>%
+  filter(bot_name == c("balko", "cyber", "dashe", "mekpreme", "pd", "prism", "splashforce") & year(transaction_date) == 2020) %>% 
+  group_by(bot_name, key_type) %>% 
+  summarize(avg_txn_price = mean(price)) %>% 
+  arrange(desc(avg_txn_price))
+```
+
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
+## longer object length is not a multiple of shorter object length
+
+## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
+## longer object length is not a multiple of shorter object length
+```
+
+```
+## `summarise()` has grouped output by 'bot_name'. You can override using the `.groups` argument.
+```
+
+```
+## # A tibble: 12 x 3
+## # Groups:   bot_name [7]
+##    bot_name    key_type avg_txn_price
+##    <fct>       <fct>            <dbl>
+##  1 cyber       lifetime         5594.
+##  2 cyber       renewal          4647.
+##  3 balko       lifetime         2728.
+##  4 prism       renewal          2170.
+##  5 mekpreme    lifetime         2058 
+##  6 balko       renewal          1818.
+##  7 pd          lifetime         1521.
+##  8 pd          renewal           929.
+##  9 mekpreme    renewal           868.
+## 10 splashforce renewal           781.
+## 11 dashe       lifetime          414.
+## 12 dashe       renewal           124.
+```
+Looking at the bots that were on BotBroker throughout 2020, we can further see proof that the number of bot keys is directly tied to the price of bots, with bots that have between 300-500 keys in total transacted having prices below $1000.
+
+A few of these bots, in particular, Splashforce and Dashe, were notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
+
+## The Great Bot Recession 
+
+To be continued...
+
+
+
+
+
