@@ -1,12 +1,12 @@
 ---
-title: "sneaker-bot-project"
+title: "A Data Wrangling & EDA Project - Sneaker Bots"
 author: "Nick"
 date: "8/20/2021"
 output: 
   html_document: 
     keep_md: yes
 ---
-## This is a project about bots... sneaker bots!
+# This is a project about bots... sneaker bots!
 
 This is a passion project to practice my data analysis skills with R, while combining my love for the world of sneakers. 
 
@@ -34,7 +34,7 @@ library(jsonlite)
 library(lubridate)
 ```
 
-### Initial data pull
+## Initial data pull
 
 We'll first construct a snippet that can efficiently allow us to convert file path backslashes to forward slashes. You can insert this code into your global options. For a more detailed explanation snippets, you can [find it on rstudio](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets). You could also use a program like Path Copy Copy.
 
@@ -92,7 +92,8 @@ velox_r <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/
 wrath_lt <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/wrath_lifetime.json")
 wrath_r <- fromJSON("C:/Users/herkm/Desktop/R Workspace/sneaker-bots-R/bot-data/wrath_renewal.json")
 ```
-### Transforming data into correct data types 
+
+## Transforming data into correct data types 
 
 This process returns us a 2 column character matrix, of transaction date and price that looks like this:
 
@@ -152,9 +153,9 @@ bb_tibbled_formatter <- function(bot_df) {
 
 ```
 
-Alright, on with the rest of the bots. (Putting the trial bot here as well for a compiled chunk to run)
+Alright, on with the rest of the bots. (output is hidden for brevity)
 
-```{r results ='hide'}
+```{r include = FALSE}
 #balko
 balko_r_e <- bb_tibbler(balko_r)
 balko_r_e <- bb_tibbled_formatter(balko_r_e)
@@ -286,9 +287,17 @@ str(wrath_lt_e)
 
 Before we join the tables, we need to first `mutate()` two columns onto each tibble, one that shows the key type (lifetime or renewal) of the bot, and another that shows the name of the bot (so we can have a tidy, long rather that wide, dataset) before we join all rows together to form a giant dataframe of all bots.
 
-The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`, 
+The tables should all have four variables with the same column names, ordered as such: `bot_name`, `key_type`, `transaction_date`, and `price`. We'll do this with the help of `select()`. Output is hidden for brevity, but we will be running the following code for each bot.
 
 ```{r}
+#balko
+balko_lt_e <- balko_lt_e %>% 
+  mutate(key_type = "lifetime", bot_name = "balko") %>% 
+  arrange(transaction_date) %>% 
+  select(bot_name, key_type, transaction_date, price)
+```
+
+```{r include = FALSE}
 #balko
 balko_lt_e <- balko_lt_e %>% 
   mutate(key_type = "lifetime", bot_name = "balko") %>% 
@@ -416,7 +425,7 @@ swftaio_r_e <- swftaio_r_e %>%
 
 #tohru
 tohru_r_e <- tohru_r_e %>% 
-  mutate(key_type = "tohru", bot_name = "tohru") %>% 
+  mutate(key_type = "renewal", bot_name = "tohru") %>% 
   arrange(transaction_date) %>% 
   select(bot_name, key_type, transaction_date, price)
 
@@ -465,7 +474,17 @@ velox_lt_r_e <- bind_rows(velox_lt_e, velox_r_e)
 wrath_lt_r_e <- bind_rows(wrath_lt_e, wrath_r_e)
 
 ```
-### Different bots bot different sites
+
+With that done, let's bind all bot transaction data into one long, tidy tibble.
+
+```{r}
+bot_txns_compiled <- bind_rows(balko_lt_r_e, carnage_r_e, cyber_lt_r_e, dashe_lt_r_e, ganesh_lt_r_e, kage_r_e, mekaio_r_e, mekpreme_lt_r_e, nebula_lt_r_e, ominous_r_e, pd_lt_r_e, prism_r_e, scottbot_r_e, splashforce_r_e, swftaio_r_e, tohru_r_e, velox_lt_r_e, wrath_lt_r_e)
+
+head(bot_txns_compiled)
+str(bot_txns_compiled)
+```
+
+## Different bots bot different sites
 
 One of the other things we should add at this point is what sites the bots support. The main sites to consider are Shopify, Footsites (FootLocker, Eastbay, Champs, FootAction), YeezySupply, Supreme, Collectibles (Funko), Retail (amazon, walmart), Mesh(JD, footpatrol, size?), Off-white, and EU sites (Snipes, Net-a-porter, Offspring, NAKED, Starcow, SVD, Courier, Slam Jam, Solebox, Zalando). 
 
@@ -477,7 +496,7 @@ Also, columns need to be created for bots that are US focused, and EU focused.
 
 Alright, onto the next `mutate()` chunk.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 #balko - shopify 
 balko_lt_r_e <- balko_lt_r_e %>% 
@@ -580,7 +599,7 @@ Bots in this list all have keys that can be sold or bought easily.
 10. estock - retail
 11. eve - retail
 12. f3 - supreme, mobile
-13. flare - mesh, footsites (US, EU), eu sites
+13. flare - mesh, footsites (EU), eu sites
 14. fluid - retail
 15. ganesh - mesh, footlocker (US, EU, ASIA), yeezysupply, eu sites, adidas (US, EU), offwhite
 16. hawkmesh - mesh
@@ -619,15 +638,15 @@ Bots in this list all have keys that can be sold or bought easily.
 49. whatbot - footsites (US), yeezysupply
 50. wrath - shopify, footsites (US), yeezysupply, supreme
 
-Just for some practice on constructing a dataframe from separate vectors...
+Just for some practice on constructing a dataframe from separate vectors... (output is hidden for brevity)
 
-```{r}
+```{r include = FALSE}
 
 bot_name_id <- c("aiomoji", "balko", 'burst', "carnage", "cyber", "dashe", "dragon", "earthside", "ecb", "estock", "eve", "f3", "flare", "fluid", "ganesh", "hawkmesh", "hayha", "ignite", "kage", "kodai", "koi", "kylin", "lexaio", "linear", "mbot", "mekaio", "mekpreme", "nebula", "noble", "nsb", "nyte", "ominous", "pd", "prism", "qbot", "reaio", "schrysant", "scottbot", "stellar", "solar", "sole", "splashforce", "swftaio", "tohru", "trickle", "thunder", "valor", "velox", "whatbot", "wrath")
 
 shopify <- c("no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "shopify", "no_shopify", "no_shopify", "no_shopify", "no_shopify", "shopify")
 
-footsites <- c("footsites_asia", "no_footsites", "no_footsites", "no_footsites", "footsites_eu & asia", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "no_footsites", "no_footsites", "footsites_us & eu", "no_footsites", "all_regions", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "all_regions", "no_footsites", "all_regions", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_asia", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "footsites_us", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us")
+footsites <- c("footsites_asia", "no_footsites", "no_footsites", "no_footsites", "all_regions_footsites", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "no_footsites", "no_footsites", "footsites_eu", "no_footsites", "all_regions_footsites", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "all_regions_footsites", "no_footsites", "all_regions_footsites", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_us", "footsites_asia", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "no_footsites", "footsites_us", "footsites_us", "no_footsites", "no_footsites", "footsites_us", "no_footsites", "footsites_us", "footsites_us")
 
 yeezysupply <- c("no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "no_yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "no_yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply", "yeezysupply")
 
@@ -651,12 +670,283 @@ collectibles <- c("no_collectibles", "collectibles", "no_collectibles", "collect
 
 mobile <- c("no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile", "no_mobile")
 
-bot_data_compiled <- tibble(bot_name_id, shopify, footsites, yeezysupply, supreme, retail, mesh, eu_sites, nike, adidas, new_balance, offwhite, collectibles)
-
-head(bot_data_compiled)
-str(bot_data_compiled)
+bot_data_compiled <- tibble(bot_name_id, shopify, footsites, yeezysupply, supreme, retail, mesh, eu_sites, nike, adidas, new_balance, offwhite, collectibles, mobile)
 
 ```
-### Factor Time
+This is how our final long dataframe looks like:
+
+```{r}
+head(bot_data_compiled)
+str(bot_data_compiled)
+```
+
+### The two data frames we've created
+
+At this point, we've created **two dataframes** - `bot_data_compiled`, and `bot_txns_compiled`, but some final manipulation needs to be done to help us have a smoother time with data analysis later on.
+
+## Factor Time
 
 As we can see from the data currently, all columns are currently character strings, when they can be turned into factors for our analysis. Time to use the some base functions like `factor()` and the `forcats` package to help us.
+
+With a full table of character columns, this might be the most efficient way to change all of them into factors. 
+
+```{r}
+
+bot_data_compiled <- bot_data_compiled %>% 
+  mutate_if(is.character, as_factor)
+
+str(bot_data_compiled)
+
+levels(bot_data_compiled$footsites)
+```
+At the moment, some factors aren't organized in the same way that the rest are (e.g. the absence of a site is not the first level), so lets get that sorted with `forcats::fct_relevel`.
+
+```{r}
+
+bot_data_compiled$footsites <- fct_relevel(bot_data_compiled$footsites, c("no_footsites", "footsites_us", "footsites_eu", "footsites_asia", "all_regions_footsites"))
+
+levels(bot_data_compiled$footsites)
+
+str(bot_data_compiled)
+```
+## Exploratory Data Analysis - Where Is The Opportunity For Bot Devs?
+
+We can first do a simple breakdown, where we take a look at where upcoming bots could consider focusing on, as some sites already are over-saturated with bots.
+
+```{r}
+#shopify breakdown
+bot_data_compiled %>% 
+  group_by(shopify) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#footsites breakdown
+bot_data_compiled %>% 
+  group_by(footsites) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#yeezysupply breakdown
+bot_data_compiled %>% 
+  group_by(yeezysupply) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#supreme breakdown
+bot_data_compiled %>% 
+  group_by(supreme) %>% 
+  summarize(n = n())%>% 
+  mutate(percent = n / sum(n) * 100)
+
+#retail
+bot_data_compiled %>% 
+  group_by(retail) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#mesh
+bot_data_compiled %>% 
+  group_by(mesh) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#eu_sites
+bot_data_compiled %>% 
+  group_by(eu_sites) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#nike 
+bot_data_compiled %>% 
+  group_by(nike) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#adidas
+bot_data_compiled %>% 
+  group_by(adidas) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#new_balance
+bot_data_compiled %>% 
+  group_by(new_balance) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#off_white
+bot_data_compiled %>% 
+  group_by(offwhite) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#collectibles
+bot_data_compiled %>% 
+  group_by(collectibles) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+#mobile
+bot_data_compiled %>% 
+  group_by(mobile) %>% 
+  summarize(n = n()) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+```
+From the results, we can easily narrow down the most hotly contested sites among bot developers - **US footsites** (18/50 bots support) and **yeezysupply** (20/50 bots support). Of course, this is in part due to the number of drops that happen on these two sites, and the potential profits that botters can make from them.
+
+However, there are some sites that are extremely popular, yet few bot developers specialize in it - sites like **footlocker EU** and **footlocker ASIA** hardly have any bots that support it.
+```{r}
+bot_data_compiled %>% 
+  filter(footsites == "footsites_eu" | footsites == "footsites_asia" | footsites == "all_regions_footsites")
+```
+This is a business opportunity for bot developers thinking of creating a new bot, as there is almost a monopoly on non-US footsites by bots like Qbot and Ganesh who perform miles better than most other bots on footlocker ASIA and EU respectively.
+
+However, the difficulty of botting footlocker is compounded by the fact that their sites are split according to NEW and OLD regions, requiring completely different scripts between both regions.
+
+At the end of the day, this is a potential area for future bot devs to look into.
+
+The other opportunity lies in creating a great shopify bot, as there are not many bots that consistently work across shopify sites.
+
+```{r}
+bot_data_compiled %>% 
+  filter(shopify == "shopify")
+```
+Out of these bots, the ones that perform phenomenally well at the moment are balko, wrath, and mek. Other bots are spotty at best on shopify, and the crown lies with these 3 bots. 
+
+My advice for a bot dev now would be to create a bot that is strong at **shopify and all footsites** - Similar to a bot like Kylin, but better. That would be the best way to create a bot that is wanted by the community, and also hold strong resell value.
+
+Of course, it's important to note the "niche" sites that some bots support, like Adidas, New Balance, or Nike. These sites usually require a huge amount of developer time investment, for little return (apart from Adidas bots and pure Nike bots), and as such do not present a good opportunity for bot devs.
+
+If a developer was looking to expand to one of these sites, I would recommend Adidas or New Balance.
+
+## Exploratory Data Analysis - Where Is The Opportunity For Bot Users?
+
+Now that we've done some preliminary analysis on what sites bots support, let's refer back to the transaction lists for the bots we have data on, `bot_txns_compiled`
+
+We'll first need to make sure bot_names and key types are factors, as they are currently in character format.
+
+```{r}
+bot_txns_compiled <- bot_txns_compiled %>% 
+  mutate_if(is.character, as_factor)
+
+str(bot_txns_compiled)
+
+levels(bot_txns_compiled$key_type)
+```
+Alright, we're good. Now, we'll try to look at some of the factors that affect price of lifetime vs renewal key in 2020. We'll first have to nail down which bots were on botbroker in 2020, from January, and check out when the firs transactions happened as well.
+
+### Bot Fever in 2020 - Fuelled By COVID
+
+```{r}
+bot_txns_compiled %>%
+    filter(transaction_date >= date("2020-01-01"), transaction_date <= date("2020-01-31")) %>% 
+    arrange(bot_name, key_type, transaction_date) %>%
+    group_by(bot_name, key_type) %>%
+    top_n(1) %>% 
+    arrange(desc(price))
+
+```
+Many of these bots at the time were at pretty stable prices in line with what they've been for at least half a year prior. However, by the middle of the year, when COVID really hit, it forced many people to stay at home for extened periods of time, and this has lasted all the way till present. With one of the most populated botting communities, the US, receiving multiple stimulus checks as well, this further changed the demand for bots. As a comparison, we'll take a look at prices of bots by the end of the year.
+
+```{r}
+bot_txns_compiled %>%
+    filter(transaction_date >= date("2020-07-01"), transaction_date <= date("2020-12-31")) %>% 
+    arrange(bot_name, key_type, transaction_date) %>%
+    group_by(bot_name, key_type) %>%
+    top_n(1) %>% 
+    arrange(desc(price))
+
+```
+Most bots were hitting all time highs then, fuelled by the demand for a side hustle at home, and the hype for sneakers further sending the prices to record highs. Just a simple comparison between Cyber, a well respected and performing bot is enough - Prices nearly doubled in a year, giving you a great > 100% ROI if you had a lifetime key handy.
+
+### How many lifetime vs renewal keys are there for bots with both? And how does it affect price?
+
+```{r}
+#balko freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "balko" & year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+bot_txns_compiled %>%
+  filter(bot_name == "balko" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+
+#cyber freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "cyber", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+bot_txns_compiled %>%
+  filter(bot_name == "cyber" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+
+#wrath freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "wrath", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+bot_txns_compiled %>%
+  filter(bot_name == "wrath" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+
+#dashe freq table / key analysis
+bot_txns_compiled %>%
+  filter(bot_name == "dashe", year(transaction_date) == 2020) %>% 
+  count(key_type) %>% 
+  mutate(percent = n / sum(n) * 100)
+
+bot_txns_compiled %>%
+  filter(bot_name == "dashe" & year(transaction_date) == 2020) %>% 
+  group_by(key_type) %>% 
+  summarize(avg_txn_price = mean(price))
+
+
+```
+
+Looking at this selection of bots, we can tell that bot key prices on average are based on two things: **number of keys**, and **performance of the bot** - The more number of keys a bot has, the lower the price will be. The better a bot performs, the more hype generated by users, and the more the community desires the bot. In general, most bot developers also choose to have about 10% to 20% lifetime keys, while the rest are renewals. 
+
+Annual renewal fees often range from $300 - $400 USD a year, giving bot devs very little incentive to make lifetime keys, which are often created for friends, giveaways on twitter, or special events.
+
+Specifically referring to Dashe, the interesting thing here is that when the number of keys (lifetime + renewal) increase, even with a higher % of lifetime keys, the price difference between the two is wider compared to the other bots.
+
+This could be a result of its significantly lower price point and status as a good entry level bot, making it a good bot for people to get into this hobby. (though it doesn't work as well as the other 3 above.)
+
+```{r}
+# Number of keys to price analysis
+
+keys_plot_2020 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "dashe", "mekpreme", "pd", "prism", "splashforce") & year(transaction_date) == 2020) %>% 
+  group_by(bot_name, key_type) %>% 
+  summarize(n = n())
+
+ggplot(keys_plot_2020, aes(x = bot_name, y = n, fill = key_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() + guides(fill = guide_legend(reverse = TRUE)) +
+  labs(y = "no. of keys", title = "Bot Keys in 2020 (Jan - Dec)")
+
+bot_txns_compiled %>%
+  filter(bot_name == c("balko", "cyber", "dashe", "mekpreme", "pd", "prism", "splashforce") & year(transaction_date) == 2020) %>% 
+  group_by(bot_name, key_type) %>% 
+  summarize(avg_txn_price = mean(price)) %>% 
+  arrange(desc(avg_txn_price))
+
+```
+Looking at the bots that were on BotBroker throughout 2020, we can further see proof that the number of bot keys is directly tied to the price of bots, with bots that have between 300-500 keys in total transacted having prices below $1000.
+
+A few of these bots, in particular, Splashforce and Dashe, were notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
+
+## The Great Bot Recession 
+
+To be continued...
+
+
+
+
+
