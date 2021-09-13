@@ -162,7 +162,9 @@ balko_r_e <- bb_tibbled_formatter(balko_r_e)
 str(balko_r_e)
 
 balko_lt_e <- bb_tibbler(balko_lt)
-balko_lt_e <- bb_tibbled_formatter(balko_lt_e)
+balko_lt_e <- bb_tibbled_formatter(balko_lt_e) 
+balko_lt_e <- balko_lt_e %>% 
+  filter(price > 1000) #to remove outlier
 str(balko_lt_e)
 
 #carnage
@@ -940,13 +942,53 @@ bot_txns_compiled %>%
 ```
 Looking at the bots that were on BotBroker throughout 2020, we can further see proof that the number of bot keys is directly tied to the price of bots, with bots that have between 300-500 keys in total transacted having prices below $1000.
 
-A few of these bots, in particular, Splashforce and Dashe, were notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
+A few of these bots, in particular, Splashforce and Dashe, were (and still are) notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
 
-## The Great Bot Recession 
+## The Great Bot Recession 2021
 
-To be continued...
+As restrictions lifted, and more people could go outside, the bot economy bubble was due to burst anytime. More bot developers were developing bots solely for hyped sites like US Footsites and Yeezysupply, further creating an extremely saturated market for users and developers alike. 
 
+Here is some of the data for the market's best bots from 2020 to 2021.
 
+```{r}
 
+#renewal prices
+bots_decline_plot_renewal <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "renewal" & year(transaction_date) == 2020) %>% group_by(bot_name)
 
+bots_decline_plot_renewal
 
+ggplot(bots_decline_plot_renewal, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+
+#lifetime prices
+
+bots_decline_plot_lifetime <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "lifetime" & year(transaction_date) == 2020) %>% group_by(bot_name)
+
+ggplot(bots_decline_plot_lifetime, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+
+```
+Let's compare that to 2021 data we have, up to mid august
+
+```{r}
+#renewal prices
+bots_decline_plot_renewal_2021 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "renewal" & year(transaction_date) == 2021) %>% group_by(bot_name)
+
+bots_decline_plot_renewal_2021
+
+ggplot(bots_decline_plot_renewal_2021, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+
+#lifetime prices
+
+bots_decline_plot_lifetime_2021 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "lifetime" & year(transaction_date) == 2021) %>% group_by(bot_name)
+
+ggplot(bots_decline_plot_lifetime_2021, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+```
+
+Some elements of EDA are left, we will pick up this project again in a bit.
