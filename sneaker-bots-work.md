@@ -259,11 +259,11 @@ str(bot_txns_compiled)
 ```
 
 ```
-## tibble [32,670 x 4] (S3: tbl_df/tbl/data.frame)
-##  $ bot_name        : chr [1:32670] "balko" "balko" "balko" "balko" ...
-##  $ key_type        : chr [1:32670] "lifetime" "lifetime" "lifetime" "lifetime" ...
-##  $ transaction_date: POSIXct[1:32670], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
-##  $ price           : num [1:32670] 2000 2700 2350 2040 2100 ...
+## tibble [32,662 x 4] (S3: tbl_df/tbl/data.frame)
+##  $ bot_name        : chr [1:32662] "balko" "balko" "balko" "balko" ...
+##  $ key_type        : chr [1:32662] "lifetime" "lifetime" "lifetime" "lifetime" ...
+##  $ transaction_date: POSIXct[1:32662], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
+##  $ price           : num [1:32662] 2000 2700 2350 2040 2100 ...
 ```
 
 ## Different bots bot different sites
@@ -766,11 +766,11 @@ str(bot_txns_compiled)
 ```
 
 ```
-## tibble [32,670 x 4] (S3: tbl_df/tbl/data.frame)
+## tibble [32,662 x 4] (S3: tbl_df/tbl/data.frame)
 ##  $ bot_name        : Factor w/ 18 levels "balko","carnage",..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ key_type        : Factor w/ 2 levels "lifetime","renewal": 1 1 1 1 1 1 1 1 1 1 ...
-##  $ transaction_date: POSIXct[1:32670], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
-##  $ price           : num [1:32670] 2000 2700 2350 2040 2100 ...
+##  $ transaction_date: POSIXct[1:32662], format: "2019-05-27 01:19:28" "2019-05-27 06:49:38" ...
+##  $ price           : num [1:32662] 2000 2700 2350 2040 2100 ...
 ```
 
 ```r
@@ -866,7 +866,7 @@ bot_txns_compiled %>%
 ## # A tibble: 2 x 3
 ##   key_type     n percent
 ##   <fct>    <int>   <dbl>
-## 1 lifetime   177    11.7
+## 1 lifetime   176    11.7
 ## 2 renewal   1333    88.3
 ```
 
@@ -881,7 +881,7 @@ bot_txns_compiled %>%
 ## # A tibble: 2 x 2
 ##   key_type avg_txn_price
 ##   <fct>            <dbl>
-## 1 lifetime         2742.
+## 1 lifetime         2758.
 ## 2 renewal          1822.
 ```
 
@@ -997,16 +997,6 @@ keys_plot_2020 <- bot_txns_compiled %>%
 ```
 
 ```
-## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
-## longer object length is not a multiple of shorter object length
-```
-
-```
-## Warning in is.na(e1) | is.na(e2): longer object length is not a multiple of
-## shorter object length
-```
-
-```
 ## `summarise()` has grouped output by 'bot_name'. You can override using the `.groups` argument.
 ```
 
@@ -1028,14 +1018,6 @@ bot_txns_compiled %>%
 ```
 
 ```
-## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
-## longer object length is not a multiple of shorter object length
-
-## Warning in `==.default`(bot_name, c("balko", "cyber", "dashe", "mekpreme", :
-## longer object length is not a multiple of shorter object length
-```
-
-```
 ## `summarise()` has grouped output by 'bot_name'. You can override using the `.groups` argument.
 ```
 
@@ -1044,28 +1026,164 @@ bot_txns_compiled %>%
 ## # Groups:   bot_name [7]
 ##    bot_name    key_type avg_txn_price
 ##    <fct>       <fct>            <dbl>
-##  1 cyber       lifetime         5594.
-##  2 cyber       renewal          4647.
-##  3 balko       lifetime         2728.
+##  1 cyber       lifetime         5690.
+##  2 cyber       renewal          4639.
+##  3 balko       lifetime         2738.
 ##  4 prism       renewal          2170.
-##  5 mekpreme    lifetime         2058 
-##  6 balko       renewal          1818.
-##  7 pd          lifetime         1521.
-##  8 pd          renewal           929.
-##  9 mekpreme    renewal           868.
-## 10 splashforce renewal           781.
-## 11 dashe       lifetime          414.
+##  5 mekpreme    lifetime         1918 
+##  6 balko       renewal          1804.
+##  7 pd          lifetime         1519.
+##  8 pd          renewal           926.
+##  9 mekpreme    renewal           869.
+## 10 splashforce renewal           784.
+## 11 dashe       lifetime          419.
 ## 12 dashe       renewal           124.
 ```
 Looking at the bots that were on BotBroker throughout 2020, we can further see proof that the number of bot keys is directly tied to the price of bots, with bots that have between 300-500 keys in total transacted having prices below $1000.
 
-A few of these bots, in particular, Splashforce and Dashe, were notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
+A few of these bots, in particular, Splashforce and Dashe, were (and still are) notorious for "backdooring" bot keys to users when they performed well, which meant selling them to bot user groups ("cook groups") at the resell price or more of what was on Botbroker and other bot sale places like Discord channels for their own gain, further driving down prices of their bots once they didn't perform as well as people expected.
 
-## The Great Bot Recession 
+## The Great Bot Recession 2021
 
-To be continued...
+As restrictions lifted, and more people could go outside, the bot economy bubble was due to burst anytime. More bot developers were developing bots solely for hyped sites like US Footsites and Yeezysupply, further creating an extremely saturated market for users and developers alike. 
+
+Here is some of the data for the market's best bots from 2020 to 2021.
 
 
+```r
+#renewal prices
+bots_decline_plot_renewal <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "renewal" & year(transaction_date) == 2020) %>% group_by(bot_name)
+```
+
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+```
+
+```
+## Warning in is.na(e1) | is.na(e2): longer object length is not a multiple of
+## shorter object length
+```
+
+```r
+bots_decline_plot_renewal
+```
+
+```
+## # A tibble: 1,935 x 4
+## # Groups:   bot_name [3]
+##    bot_name key_type transaction_date    price
+##    <fct>    <fct>    <dttm>              <dbl>
+##  1 balko    renewal  2020-01-02 02:20:45  1650
+##  2 balko    renewal  2020-01-02 10:09:59  2000
+##  3 balko    renewal  2020-01-03 23:28:00  1950
+##  4 balko    renewal  2020-01-05 02:14:59  1615
+##  5 balko    renewal  2020-01-05 17:54:29  1625
+##  6 balko    renewal  2020-01-07 02:08:40  1510
+##  7 balko    renewal  2020-01-08 04:41:49  1900
+##  8 balko    renewal  2020-01-08 23:23:02  1760
+##  9 balko    renewal  2020-01-09 17:33:14  1575
+## 10 balko    renewal  2020-01-10 10:08:54  1930
+## # ... with 1,925 more rows
+```
+
+```r
+ggplot(bots_decline_plot_renewal, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+```
+
+![](sneaker-bots-work_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
+
+```r
+#lifetime prices
+
+bots_decline_plot_lifetime <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "lifetime" & year(transaction_date) == 2020) %>% group_by(bot_name)
+```
+
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+```
+
+```r
+ggplot(bots_decline_plot_lifetime, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+```
+
+![](sneaker-bots-work_files/figure-html/unnamed-chunk-28-2.png)<!-- -->
+Let's compare that to 2021 data we have, up to mid august
 
 
+```r
+#renewal prices
+bots_decline_plot_renewal_2021 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "renewal" & year(transaction_date) == 2021) %>% group_by(bot_name)
+```
 
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+```
+
+```
+## Warning in is.na(e1) | is.na(e2): longer object length is not a multiple of
+## shorter object length
+```
+
+```r
+bots_decline_plot_renewal_2021
+```
+
+```
+## # A tibble: 549 x 4
+## # Groups:   bot_name [3]
+##    bot_name key_type transaction_date    price
+##    <fct>    <fct>    <dttm>              <dbl>
+##  1 balko    renewal  2021-01-01 04:30:28  2180
+##  2 balko    renewal  2021-01-01 17:09:13  2100
+##  3 balko    renewal  2021-01-02 15:55:57  1850
+##  4 balko    renewal  2021-01-03 01:49:25  1750
+##  5 balko    renewal  2021-01-03 02:42:07  1700
+##  6 balko    renewal  2021-01-04 03:49:27  2030
+##  7 balko    renewal  2021-01-05 01:17:06  2300
+##  8 balko    renewal  2021-01-06 20:27:14  2350
+##  9 balko    renewal  2021-01-08 17:14:50  1900
+## 10 balko    renewal  2021-01-08 22:59:17  2140
+## # ... with 539 more rows
+```
+
+```r
+ggplot(bots_decline_plot_renewal_2021, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+```
+
+![](sneaker-bots-work_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+
+```r
+#lifetime prices
+
+bots_decline_plot_lifetime_2021 <- bot_txns_compiled %>% 
+  filter(bot_name == c("balko", "cyber", "splashforce") & key_type == "lifetime" & year(transaction_date) == 2021) %>% group_by(bot_name)
+```
+
+```
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+
+## Warning in `==.default`(bot_name, c("balko", "cyber", "splashforce")): longer
+## object length is not a multiple of shorter object length
+```
+
+```r
+ggplot(bots_decline_plot_lifetime_2021, aes(x = transaction_date, y = price, colour = bot_name)) +
+         geom_line()
+```
+
+![](sneaker-bots-work_files/figure-html/unnamed-chunk-29-2.png)<!-- -->
+
+Some elements of EDA are left, we will pick up this project again in a bit.
